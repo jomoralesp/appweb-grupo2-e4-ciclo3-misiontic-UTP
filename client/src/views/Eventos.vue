@@ -1,17 +1,23 @@
 <template>
   <div class="Eventos">
     <h1>Eventos</h1>
-    <div class="Eventos__lista" >
-        <ItemEvento :dataEvento = "item_evento" v-for = "item_evento in lista_eventos" :key="item_evento.id"></ItemEvento>
+    <div class="Eventos__lista">
+      <ItemEvento
+        :dataEvento="item_evento"
+        v-for="item_evento in lista_eventos"
+        :key="item_evento.id"
+      ></ItemEvento>
     </div>
   </div>
 </template>
+
 <script>
 import ItemEvento from "./../components/ItemEvento.vue";
 export default {
   components: { ItemEvento: ItemEvento },
   data() {
     return {
+      mensaje: "hola mundo",
       lista_eventos: [], //inicializamos un array de datos vacío
     };
   },
@@ -20,7 +26,9 @@ export default {
       .then((res) => res.json())
       .then((data) => {
         this.lista_eventos = data;
-      });
+        console.log(this.lista_eventos);
+      })
+      
   },
 };
 </script>

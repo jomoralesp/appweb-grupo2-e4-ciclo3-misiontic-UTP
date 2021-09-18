@@ -44,11 +44,13 @@ export default {};
 
   box-shadow: 0rem 0.5rem 1rem $color-header-shadow;
 
+  z-index: 99999;
+
   ul {
     list-style: none;
   }
   li {
-    font-family: "Mallanna", sans-serif;
+    font-family: "Assistant", sans-serif;
     font-size: 1.4rem;
     a {
       text-decoration: none;
@@ -72,7 +74,7 @@ export default {};
   }
   .header__navbar_nav {
     display: flex;
-justify-content: right;
+    justify-content: right;
     .header__navbar_links {
       display: flex;
       justify-content: flex-end;
@@ -92,8 +94,8 @@ justify-content: right;
       width: 7.5rem;
       margin: 0 10px;
       border-radius: 50rem;
-          font-family: "Mallanna", sans-serif;
-    font-size: 1.3rem;
+      font-family: "Assistant", sans-serif;
+      font-size: 1.3rem;
     }
     .header__btn-login {
       border: 2px $color-salmon solid;
