@@ -4,7 +4,7 @@
       <router-link to="/">
         <img
           class="header__navbar-brand-image"
-          src="@/assets/Logo_app.png"
+          src="@/assets/Logo_MuevetexPuntos.png"
           alt=""
         />
       </router-link>
@@ -38,7 +38,7 @@ export default {};
 </script>
 <style lang="scss" scoped>
 .header {
-  padding: 5px 50px;
+  padding: 0px 50px;
   display: grid;
   grid-template-columns: 0.75fr 1fr 0.5fr;
 
@@ -69,7 +69,8 @@ export default {};
     display: inline-flex;
     justify-content: left;
     .header__navbar-brand-image {
-      width: 150px;
+      width: 120px;
+      height: 60px;
     }
   }
   .header__navbar_nav {
@@ -103,7 +104,7 @@ export default {};
       color: white;
     }
     .header__btn-register {
-      border: 2px $color-salmon solid;
+      border: 1px $color-salmon solid;
       background: white;
       color: $color-text-header;
     }
