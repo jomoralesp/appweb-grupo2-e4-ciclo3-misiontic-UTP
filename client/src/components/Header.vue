@@ -4,7 +4,7 @@
       <router-link to="/">
         <img
           class="header__navbar-brand-image"
-          src="@/assets/Logo_app.png"
+          src="@/assets/Logo_MuevetexPuntos.png"
           alt=""
         />
       </router-link>
@@ -38,18 +38,20 @@ export default {};
 </script>
 <style lang="scss" scoped>
 .header {
-  padding: 5px 50px;
+  padding: 0px 50px;
   display: grid;
   grid-template-columns: 0.75fr 1fr 0.5fr;
 
   box-shadow: 0rem 0.5rem 1rem $color-header-shadow;
 
+  z-index: 99999;
+
   ul {
     list-style: none;
   }
   li {
-    font-family: "Mallanna", sans-serif;
-    font-size: 1.4rem;
+    font-family: "Assistant", sans-serif;
+    font-size: 18px;
     a {
       text-decoration: none;
       color: $color-text-header;
@@ -67,12 +69,13 @@ export default {};
     display: inline-flex;
     justify-content: left;
     .header__navbar-brand-image {
-      width: 150px;
+      width: 120px;
+      height: 60px;
     }
   }
   .header__navbar_nav {
     display: flex;
-justify-content: right;
+    justify-content: right;
     .header__navbar_links {
       display: flex;
       justify-content: flex-end;
@@ -92,8 +95,8 @@ justify-content: right;
       width: 7.5rem;
       margin: 0 10px;
       border-radius: 50rem;
-          font-family: "Mallanna", sans-serif;
-    font-size: 1.3rem;
+      font-family: "Assistant", sans-serif;
+      font-size: 18px;
     }
     .header__btn-login {
       border: 2px $color-salmon solid;
@@ -101,7 +104,7 @@ justify-content: right;
       color: white;
     }
     .header__btn-register {
-      border: 2px $color-salmon solid;
+      border: 1px $color-salmon solid;
       background: white;
       color: $color-text-header;
     }

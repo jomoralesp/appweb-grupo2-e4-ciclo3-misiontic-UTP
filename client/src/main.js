@@ -9,6 +9,11 @@ import "bootstrap/dist/css/bootstrap.css";
 //Importando la libreria mdi
 import "@mdi/font/css/materialdesignicons.min.css";
 
+// Libreria para las alertas
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+
+import 'sweetalert2/src/sweetalert2.scss'
+
 Vue.config.productionTip = false
 
 new Vue({
