@@ -1,63 +1,116 @@
 <template>
-  <div class="Eventos__item">
-    <div class="Eventos__item-description">
-      <p>{{ dataEvento.descripcion }}</p>
+  <button>
+    <div class="Eventos__item">
+      <div class="Eventos__ItemEvento-img">
+        <img :src="require('@/assets/images/eventos/'+ dataEvento.urlImagen)" alt="" />
+        <h2>Virtual</h2>
+      </div>
+      <div class="Eventos__ItemEvento-text">
+        <div class="itemevento-descripcion">{{dataEvento.titulo}}</div>
+        <div class="itemevento-puntos">
+          <h1>{{dataEvento.puntos}}</h1>
+          <p id="text-puntos">Puntos</p>
+        </div>
+        <div class="itemevento-fecha">
+          {{dataEvento.fecha}} <br />
+          {{dataEvento.hora}}
+        </div>
+      </div>
     </div>
-    <div class="Eventos__item-imgtitle">
-      <img :src="require('@/assets/images/eventos/' + dataEvento.urlImagen)" alt="" />
-      <h1>{{ dataEvento.titulo }}</h1>
-    </div>
-  </div>
+  </button>
 </template>
+
+
 <script>
 const path = require("path");
 export default {
   props: ["dataEvento", "simple"],
   data() {
     return {
-      dataE: {
-        imagen: "@/assets/papiroflexia.jpg",
-      },
-      name: "papiroflexia.jpg",
-      imagenEvento: require("@/assets/images/eventos/papiroflexia.jpg"),
+      
     };
   },
   computed: {
     loadimage: (url) => {
-      let img = require(url);
+      let img = require("@/assets/images/eventos/"+ url);
       return img;
     },
   },
-  beforeMount() {
-    //this.imagenEvento = require(this.dataE.imagen);
-  },
-  mounted() {
-    //this.imagenEvento = require(this.dataE.imagen);
-  },
-  methods: {
-  },
+
+  methods: {},
 };
 </script>
 <style lang = "scss" scoped>
-.Eventos__item {
-  margin-block: 1rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  .Eventos__item-description {
-    display: grid;
+
+button{
+  border: none;
+  background: none;
+  padding: 0;
+  
+  &:hover{
+    transition: box-shadow 0.7s;
+    box-shadow: 0rem 0rem 1rem $color-header-shadow;
   }
-  .Eventos__item-imgtitle {
+}
+.Eventos__item {
+  min-height: 350px;
+  font-family: "Assistant", sans-serif;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  .Eventos__ItemEvento-img {
     position: relative;
     display: inline-block;
     img {
       width: 100%;
     }
-    h1 {
+    h2 {
+      color: white;
       position: absolute;
-      background: rgba(255, 255, 255, 0.5);
-      width: 100%;
-      bottom: 0;
+      background: $color-footer-section-contacto;
+      width: 40%;
+      top: 0;
       margin: 0;
+      font-size: 18px;
+      height: 28px;
+    }
+  }
+  .Eventos__ItemEvento-text {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: grid;
+    grid-template-areas: "descripcion descripcion" "puntos fecha";
+    grid-template-columns: 115px 1fr;
+    .itemevento-descripcion {
+      grid-area: descripcion;
+      font-size: 24px;
+      background: white;
+    }
+    .itemevento-puntos {
+      width: 115px;
+      height: 80px;
+      background: $color-footer-section-contacto;
+      color: white;
+
+      display: flex;
+      justify-content: center;
+      position: relative;
+      h1 {
+        font-size: 48px;
+      }
+      #text-puntos {
+        position: absolute;
+        font-size: 24px;
+        top: 42px;
+      }
+    }
+    .itemevento-fecha {
+      background: white;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      font-size: 24px;
     }
   }
 }

@@ -51,7 +51,7 @@ export default {};
   }
   li {
     font-family: "Assistant", sans-serif;
-    font-size: 1.4rem;
+    font-size: 18px;
     a {
       text-decoration: none;
       color: $color-text-header;
@@ -96,7 +96,7 @@ export default {};
       margin: 0 10px;
       border-radius: 50rem;
       font-family: "Assistant", sans-serif;
-      font-size: 1.3rem;
+      font-size: 18px;
     }
     .header__btn-login {
       border: 2px $color-salmon solid;
