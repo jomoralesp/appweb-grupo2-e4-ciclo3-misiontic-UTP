@@ -12,8 +12,18 @@
     </div>
     <div style="height: 10px; background: #c4c4c4"></div>
     <h1 class="Eventos__titulo-proximos">Próximos eventos</h1>
-    <img src="@/assets/Component1Eventos.png" alt="" />
-    <img src="@/assets/Component2Eventos.png" alt="" />
+    <div class="Eventos__seccion-proximos">
+      <img
+        class="Eventos__itemevento-proximo c1"
+        src="@/assets/Component1Eventos.png"
+        alt=""
+      />
+      <img
+        class="Eventos__itemevento-proximo c2"
+        src="@/assets/Component2Eventos.png"
+        alt=""
+      />
+    </div>
     <div class="Eventos__seccion-premios">
       <h1>Redime los puntos por premios</h1>
       <img src="@/assets/Component3Eventos.png" alt="" />
@@ -58,7 +68,7 @@ export default {
   color: white;
   margin-left: 50px;
   width: 50%;
-  font-size: 48px;
+  font-size: 36px;
   padding-top: 85px;
   margin-bottom: 50px;
 }
@@ -72,6 +82,20 @@ export default {
   font-family: "Assistant", sans-serif;
   font-size: 52px;
 }
+.Eventos__seccion-proximos{
+  display: flex;
+  flex-direction: column;
+  .c1 {
+    align-self: flex-end;
+  }
+  .c2 {
+    align-self: flex-start;
+  }
+}
+.Eventos__itemevento-proximo {
+  height: 90%;
+  
+}
 .Eventos__seccion-premios {
   padding: 50px 0;
   background-image: linear-gradient(
@@ -79,17 +103,16 @@ export default {
     transparent 35%,
     rgba(54, 69, 89, 0.57) 35.1%
   );
-
   > h1 {
     padding-top: 20px;
     color: white;
   }
 }
-.Eventos__seccionpremios-btn{
+.Eventos__seccionpremios-btn {
   background: $color-salmon;
   border-radius: 10px;
   border: none;
-    font-family: "Assistant", sans-serif;
+  font-family: "Assistant", sans-serif;
   font-size: 48px;
   padding: 5px 50px;
   color: white;

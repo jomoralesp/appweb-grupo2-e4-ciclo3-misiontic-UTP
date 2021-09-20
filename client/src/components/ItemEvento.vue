@@ -53,7 +53,7 @@ button{
   }
 }
 .Eventos__item {
-  min-height: 350px;
+  min-height: 300px;
   font-family: "Assistant", sans-serif;
   display: flex;
   flex-direction: column;
@@ -84,7 +84,7 @@ button{
     grid-template-columns: 115px 1fr;
     .itemevento-descripcion {
       grid-area: descripcion;
-      font-size: 24px;
+      font-size: 18px;
       background: white;
     }
     .itemevento-puntos {
