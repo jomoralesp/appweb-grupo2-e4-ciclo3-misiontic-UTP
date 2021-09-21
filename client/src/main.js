@@ -10,9 +10,13 @@ import "bootstrap/dist/css/bootstrap.css";
 import "@mdi/font/css/materialdesignicons.min.css";
 
 // Libreria para las alertas
-import Swal from 'sweetalert2/dist/sweetalert2.js'
+import VueSweetalert2 from 'vue-sweetalert2';
 
-import 'sweetalert2/src/sweetalert2.scss'
+// If you don't need the styles, do not connect
+import 'sweetalert2/dist/sweetalert2.min.css';
+
+Vue.use(VueSweetalert2);
+
 
 Vue.config.productionTip = false
 
