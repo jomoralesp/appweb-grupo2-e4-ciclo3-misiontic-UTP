@@ -1,19 +1,19 @@
 <template>
-  <div class="ItemPremio card rounded-3" v-on:click="showAlert()">
+  <div class="ItemPremio card" v-on:click="showAlert()">
     <div class="ItemPremio_img position-relative">
-      <!-- Si el componente se encuentra en promo -->
+      <!-- Si el componente se encuentra agotado -->
       <h1 
       class="fw-bold position-absolute top-0 start-0 fs-4 w-25 py-2 ItemPremio_tituloPromo"
-      v-if="dataPremio.promo"
+      v-if="!dataPremio.disponible"
       >
-        Promo
+        AGOTADO
       </h1>
       <!-- IMagen del premio -->
       <img
         class="img-fluid"  :src="require('@/assets'+ dataPremio.ulrImagen)" alt=""
       />
     </div>
-    <div class="ItemPremio_puntos">
+    <div class="ItemPremio_puntos card-body">
       <p class="fs-6 mb-0">PUNTOS</p>
       <!-- valor de puntos -->
       <h1 class="fs-1">{{dataPremio.puntos}}</h1>
@@ -33,6 +33,7 @@ export default {
 </script>
 <style scoped lang="scss">
 .ItemPremio {
+  border-radius: 50px;
   font-family: "Assistant", sans-serif;
 }
 .ItemPremio_tituloPromo {

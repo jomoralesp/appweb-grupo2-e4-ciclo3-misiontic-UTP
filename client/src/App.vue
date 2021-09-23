@@ -9,8 +9,9 @@
 <script>
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
+import ModalLogin from "./components/ModalLogin.vue";
 export default {
-  components: {'Header':Header, 'Footer':Footer}
+  components: {'Header':Header, 'Footer':Footer, 'ModalLogin':ModalLogin}
 }
 </script>
 

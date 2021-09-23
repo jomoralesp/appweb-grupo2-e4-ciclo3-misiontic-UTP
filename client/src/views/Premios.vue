@@ -5,6 +5,7 @@
       <ItemPremio v-for= "dataPremio in dataPremios" :key="dataPremio.id" :dataPremio="dataPremio" ></ItemPremio>
     </div>
   </div>
+
 </template>
 <script>
 import ItemPremio from "./../components/ItemPremio.vue";
@@ -14,37 +15,37 @@ export default {
       dataPremios: [
         {
           id: 0,
-          promo: false,
+          disponible: false,
           puntos: 260,
           ulrImagen: '/images/premios/sombrillarecogible.jpg'
         },
         {
           id: 1,
-          promo: true,
+          disponible: true,
           puntos: 600,
           ulrImagen: '/images/premios/Busocuelloredondoblanco.jpg'
         },
         {
           id: 2,
-          promo: false,
+          disponible: false,
           puntos: 200,
           ulrImagen: '/images/premios/camisetapoloblanco.jpg'
         },
         {
           id: 3,
-          promo: true,
+          disponible: true,
           puntos: 400,
           ulrImagen: '/images/premios/Busocuelloredondoblanco.jpg'
         },
         {
           id: 4,
-          promo: false,
+          disponible: false,
           puntos: 400,
           ulrImagen: '/images/premios/Busocuelloredondoblanco.jpg'
         },
         {
           id: 5,
-          promo: true,
+          disponible: true,
           puntos: 260,
           ulrImagen: '/images/premios/sombrillarecogible.jpg'
         },

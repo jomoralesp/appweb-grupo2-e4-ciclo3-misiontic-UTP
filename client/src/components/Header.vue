@@ -1,40 +1,61 @@
 <template>
-  <header class="header navbar bg-light">
-    <div class="header__navbar-brand navbar-brand">
-      <router-link to="/">
-        <img
-          class="header__navbar-brand-image"
-          src="@/assets/Logo_MuevetexPuntos.png"
-          alt=""
-        />
-      </router-link>
-    </div>
-    <div class="header__navbar_nav">
-      <nav class="">
-        <ul class="header__navbar_links">
-          <li>
-            <router-link to="/">Inicio</router-link>
-          </li>
-          <li>
-            <router-link to="/eventos">Eventos</router-link>
-          </li>
-          <li>
-            <router-link to="/premios">Premios</router-link>
-          </li>
-          <li>
-            <router-link to="/contactenos">Contactenos</router-link>
-          </li>
-        </ul>
-      </nav>
-    </div>
-    <div class="header__section-login">
-      <button class="header__btn-login">Ingresar</button>
-      <button class="header__btn-register">Registrate</button>
-    </div>
-  </header>
+  <div>
+    <header class="header navbar bg-light">
+      <div class="header__navbar-brand navbar-brand">
+        <router-link to="/">
+          <img
+            class="header__navbar-brand-image"
+            src="@/assets/Logo_MuevetexPuntos.png"
+            alt=""
+          />
+        </router-link>
+      </div>
+      <div class="header__navbar_nav">
+        <nav class="">
+          <ul class="header__navbar_links">
+            <li>
+              <router-link to="/">Inicio</router-link>
+            </li>
+            <li>
+              <router-link to="/eventos">Eventos</router-link>
+            </li>
+            <li>
+              <router-link to="/premios">Premios</router-link>
+            </li>
+            <li>
+              <router-link to="/contactenos">Contactenos</router-link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="header__section-login">
+        <button class="header__btn-login" @click="showModalLogin">
+          Ingresar
+        </button>
+        <button class="header__btn-register">Registrate</button>
+      </div>
+    </header>
+    <ModalLogin :showModal="isOpenModalLogin" @closeLogin="closeModalLogin"></ModalLogin>
+  </div>
 </template>
 <script>
-export default {};
+import ModalLogin from "./ModalLogin.vue";
+export default {
+  data() {
+    return {
+      isOpenModalLogin: false,
+    };
+  },
+  methods: {
+    showModalLogin() {
+      this.isOpenModalLogin = true;
+    },
+    closeModalLogin() {
+      this.isOpenModalLogin = false;
+    },
+  },
+  components: { ModalLogin },
+};
 </script>
 <style lang="scss" scoped>
 .header {
