@@ -2,31 +2,30 @@
   <div class="ItemPremio card" v-on:click="showAlert()">
     <div class="ItemPremio_img position-relative">
       <!-- Si el componente se encuentra agotado -->
-      <h1 
-      class="fw-bold position-absolute top-0 start-0 fs-4 w-25 py-2 ItemPremio_tituloPromo"
-      v-if="!dataPremio.disponible"
+      <h1
+        class="fw-bold position-absolute top-0 start-0 fs-4 w-25 py-2 ItemPremio_tituloPromo"
+        v-if="!dataPremio.disponible"
       >
         AGOTADO
       </h1>
       <!-- IMagen del premio -->
-      <img
-        class="img-fluid"  :src="require('@/assets'+ dataPremio.ulrImagen)" alt=""
-      />
+      <img class="img-fluid" :src="dataPremio.ulrImagen" alt="" />
     </div>
     <div class="ItemPremio_puntos card-body">
       <p class="fs-6 mb-0">PUNTOS</p>
       <!-- valor de puntos -->
-      <h1 class="fs-1">{{dataPremio.puntos}}</h1>
+      <h1 class="fs-1">{{ dataPremio.puntos }}</h1>
+      <span class="bi bi-person"></span>
     </div>
   </div>
 </template>
 <script>
 export default {
-  props: ['dataPremio'],
+  props: ["dataPremio"],
   methods: {
     showAlert() {
       // Use sweetalert2
-      this.$swal('Ha presionado el premio: ' + this.dataPremio.id);
+      this.$swal("Ha presionado el premio: " + this.dataPremio.id);
     },
   },
 };

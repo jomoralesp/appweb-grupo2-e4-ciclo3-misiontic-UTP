@@ -29,9 +29,7 @@
         </nav>
       </div>
       <div class="header__section-login">
-        <button class="header__btn-login" @click="showModalLogin">
-          Ingresar
-        </button>
+        <button class="header__btn-login" @click="showModalLogin">Ingresar</button>
         <button class="header__btn-register">Registrate</button>
       </div>
     </header>
@@ -65,7 +63,7 @@ export default {
 
   box-shadow: 0rem 0.5rem 1rem $color-header-shadow;
 
-  z-index: 99999;
+  z-index: 799;
 
   ul {
     list-style: none;
