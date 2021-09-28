@@ -3,7 +3,7 @@
               <div class="wrapper">
                   <div class="clash-card barbarian">
                     <div class="clash-card__image clash-card__image--barbarian">
-                      <img src = "../assets/camisetapolonegra_adobespark.png" alt="barbarian" />
+                      <img :src="require('@/assets/'+ imagen)" alt="barbarian" />
                     </div>
                     <div class="clash-card__unit-name">{{nombre}}</div>
                     <div class="clash-card__unit-description">
@@ -11,19 +11,8 @@
                       </div>
 
                     <div class="clash-card__unit-stats clash-card__unit-stats--barbarian clearfix">
-                      <div class="one-third">
-
-                      </div>
-
-                      <div class="one-third">
                         <div class="stat">Puntos</div>
                         <div class="stat-value">{{puntos}}</div>
-                      </div>
-
-                      <div class="one-third no-border">
-              
-                      </div>
-
                     </div>
 
                   </div> <!-- end clash-card barbarian-->
@@ -42,7 +31,10 @@ export default{
     return{
       
     }
-  }
+  },
+  mounted() {
+    console.log(this.imagen)
+  },
 }
 </script>
 
@@ -52,9 +44,7 @@ export default{
     @import url('https://fonts.googleapis.com/css2?family=Allerta&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Assistant&display=swap');
     //Card View
-
     $border-radius-size: 14px;
-
     .wrapper {
       padding-top: 40px;
       padding-bottom: 40px;
@@ -63,7 +53,6 @@ export default{
         outline: 0;
       }
     }
-
     .clash-card {
       background: white;
       width: 252px;
@@ -77,7 +66,6 @@ export default{
       transition: 0.5s;
       
     }
-
     .clash-card:hover{
       width: 294px;
       height: 420px;
@@ -86,7 +74,6 @@ export default{
       z-index: 20;
       top: -20px;
       transition: 0.5s;
-
           .clash-card__image--barbarian {
             background-size: cover;
             img {
@@ -94,15 +81,12 @@ export default{
               top:-10px;
             }
           }
-
           .clash-card__unit-stats--barbarian {
             background-size: cover;
             position: relative;
             bottom: -144px;
           }
-
     }
-
     .clash-card__image {
       position: relative;
       height: 150px;
@@ -110,8 +94,6 @@ export default{
       border-top-left-radius: $border-radius-size;
       border-top-right-radius: $border-radius-size;
     }
-
-
     .clash-card__image--barbarian {
       background: url(../assets/Rec.png);
       background-size: cover;
@@ -124,7 +106,6 @@ export default{
         top:-10px;
       }
     }
-
     .clash-card__unit-name {
       font-size: 20px;
       color: black;
@@ -133,21 +114,20 @@ export default{
       margin-top: 15px;
       font-family: 'Allerta', sans-serif;
     }
-
     .clash-card__unit-description {
       padding: 10px 20px 10px 20px;
       font-size: 14px;
       font-family: 'Assistant', sans-serif;
     }
-
     .clash-card__unit-stats--barbarian {
       background: url(../assets/Rec.png);
+      height: 10%;
       background-size: cover;
       position: relative;
-      bottom: -100px;
+      bottom: -102px;
       transition: 0.5s;
+      height: 15% ;
     }
-
     .clash-card__unit-stats {
       
       color: white;
@@ -165,6 +145,7 @@ export default{
         position: relative;
         font-size: 14px;
         font-family: 'Allerta', sans-serif;
+        
       }
       
       .stat-value {
@@ -172,12 +153,77 @@ export default{
         font-size: 28px;
         font-family: 'Baloo Tamma 2', cursive;
       }
+    }
+    //Responsive mediaQuery
+    @media only screen and (min-width: 1600px) {
+      .clash-card {
+        background: white;
+        width: 80%;
+        height: 400px;
+        display: inline-flex;
+        flex-direction: column;
+        position: relative;
+        text-align: center;
+        overflow: auto;
+      }
+      .clash-card__unit-stats {
+      display: flex;
+      align-content: flex-start;
+      justify-content: center;
+      align-items: center;
+      .stat {
+        position: flex;
+        text-align: center;
+        font-size: 20px;
+      }
+        .stat-value {
+          font-size: 20px;
+ 
+        }
+    }
+     .clash-card__unit-stats--barbarian {
+       position: relative;
+       top: 33px; 
+       
+     }
+    .clash-card__unit-description {
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-top: 10px;
+      height: 20%;
+      font-size: 20px;
+    }
+    .clash-card__unit-name {
+      font-size: 24px;
+      margin-bottom: 5px;
+      margin-top: 15px;
+    }
+    .clash-card:hover{
+      margin: 5px;
+      z-index: 90;
+      top: -20px;
+      transition: 0.5s;
+          .clash-card__image--barbarian {
+            background-size: cover;
+            img {
+              left:60px;
+              top:-10px;
+            }
+          }
+          .clash-card__unit-stats--barbarian {
+            background-size: cover;
+            position: relative;
+            top: 45px;
 
-      .no-border {
-        border-right: none;
+          }
+    }
+    .clash-card__image--barbarian {
+      img {
+        position: absolute;
+        left:60px;
+        top:-10px;
       }
     }
-
+    } //Fin del mediaQuery
     //Final Card View
-
 </style>

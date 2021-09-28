@@ -1,11 +1,11 @@
 <template>
-  <div>
-    <header class="header navbar bg-light">
+  
+    <header class="header navbar">
       <div class="header__navbar-brand navbar-brand">
         <router-link to="/">
           <img
             class="header__navbar-brand-image"
-            src="@/assets/Logo_MuevetexPuntos.png"
+            src="@/assets/Logo_app.png"
             alt=""
           />
         </router-link>
@@ -29,48 +29,45 @@
         </nav>
       </div>
       <div class="header__section-login">
-        <button class="header__btn-login" @click="showModalLogin">Ingresar</button>
-        <button class="header__btn-register">Registrate</button>
+        <button class="header__btn-login" @click="$emit('showLogin')">
+          Ingresar
+        </button>
+        <button class="header__btn-register" @click="$emit('showRegister')">
+          Registrate
+        </button>
+      </div>
+      <div class="header__btn-collapse">
+        <button class="mdi mdi-menu"><span class=""></span></button>
       </div>
     </header>
-    <ModalLogin :showModal="isOpenModalLogin" @closeLogin="closeModalLogin"></ModalLogin>
-  </div>
 </template>
+
 <script>
-import ModalLogin from "./ModalLogin.vue";
 export default {
   data() {
-    return {
-      isOpenModalLogin: false,
-    };
+    return {};
   },
-  methods: {
-    showModalLogin() {
-      this.isOpenModalLogin = true;
-    },
-    closeModalLogin() {
-      this.isOpenModalLogin = false;
-    },
-  },
-  components: { ModalLogin },
 };
 </script>
+
 <style lang="scss" scoped>
+
+$breackpoint: 768px;
+
 .header {
-  padding: 0px 50px;
+  
   display: grid;
+
   grid-template-columns: 0.75fr 1fr 0.5fr;
 
   box-shadow: 0rem 0.5rem 1rem $color-header-shadow;
-
-  z-index: 799;
 
   ul {
     list-style: none;
   }
   li {
-    font-family: "Assistant", sans-serif;
-    font-size: 18px;
+    font-family: "Mallanna", sans-serif;
+    //font-size: 1.4rem;
     a {
       text-decoration: none;
       color: $color-text-header;
@@ -84,15 +81,33 @@ export default {
     }
   }
 
+  @media (min-width: $breackpoint) {
+    background: white;
+    padding: 5px 50px;
+    grid-template-areas: "logo navegacion login";
+    grid-template-columns: 0.75fr 1fr 0.5fr;
+    grid-column-gap: 5%;
+  }
+  @media (max-width: $breackpoint) {
+    padding: 2px 10px;
+    grid-template-areas: "logo btnCollapse""login login""navegacion navegacion";
+
+  }
+
+
   .header__navbar-brand {
+    grid-area: logo;
     display: inline-flex;
     justify-content: left;
     .header__navbar-brand-image {
-      width: 120px;
-      height: 60px;
+      width: 150px;
+        @media (max-width: 768px) {
+      width: 80px;
+  }
     }
   }
   .header__navbar_nav {
+    grid-area: navegacion;
     display: flex;
     justify-content: right;
     .header__navbar_links {
@@ -101,21 +116,21 @@ export default {
       margin-bottom: 0;
 
       li {
-        margin-left: 50px;
+        margin-left: 20%;
       }
     }
   }
   .header__section-login {
+    grid-area: login;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    padding-left: 40px;
     button {
-      width: 7.5rem;
+      padding: 0 5%;
       margin: 0 10px;
       border-radius: 50rem;
-      font-family: "Assistant", sans-serif;
-      font-size: 18px;
+      font-family: "Mallanna", sans-serif;
+      
     }
     .header__btn-login {
       border: 2px $color-salmon solid;
@@ -123,10 +138,16 @@ export default {
       color: white;
     }
     .header__btn-register {
-      border: 1px $color-salmon solid;
+      border: 2px $color-salmon solid;
       background: white;
       color: $color-text-header;
     }
+  }
+  .header__btn-collapse{
+    grid-area: btnCollapse;
+      @media (min-width: $breackpoint) {
+        display: none;
+  }
   }
 }
 </style>

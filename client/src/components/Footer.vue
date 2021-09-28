@@ -73,7 +73,7 @@ export default {};
 <style scoped lang="scss">
 .footer {
   background: $color-footer;
-  font-size: 24px;
+  font-size: 18px;
   .footer__div-logo {
     display: flex;
     justify-content: left;

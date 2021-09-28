@@ -1,9 +1,10 @@
 <template>
+<router-link :to="'/premios/'+ dataPremio.id">
   <div class="ItemPremio card" v-on:click="showAlert()">
     <div class="ItemPremio_img position-relative">
       <!-- Si el componente se encuentra agotado -->
       <h1
-        class="fw-bold position-absolute top-0 start-0 fs-4 w-25 py-2 ItemPremio_tituloPromo"
+        class="fw-bold position-absolute top-0 start-0 fs-4 w-50 py-2 ItemPremio_tituloPromo"
         v-if="!dataPremio.disponible"
       >
         AGOTADO
@@ -15,9 +16,10 @@
       <p class="fs-6 mb-0">PUNTOS</p>
       <!-- valor de puntos -->
       <h1 class="fs-1">{{ dataPremio.puntos }}</h1>
-      <span class="bi bi-person"></span>
     </div>
   </div>
+</router-link>
+
 </template>
 <script>
 export default {
@@ -25,14 +27,14 @@ export default {
   methods: {
     showAlert() {
       // Use sweetalert2
-      this.$swal("Ha presionado el premio: " + this.dataPremio.id);
+      //this.$swal("Ha presionado el premio: " + this.dataPremio.id);
     },
   },
 };
 </script>
 <style scoped lang="scss">
 .ItemPremio {
-  border-radius: 50px;
+  text-decoration: none;
   font-family: "Assistant", sans-serif;
 }
 .ItemPremio_tituloPromo {

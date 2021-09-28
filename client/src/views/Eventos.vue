@@ -14,20 +14,20 @@
     <h1 class="Eventos__titulo-proximos">Próximos eventos</h1>
     <div class="Eventos__seccion-proximos">
       <img
-        class="Eventos__itemevento-proximo c1"
+        class="Eventos__itemevento-proximo c1 img-fluid"
         src="@/assets/Component1Eventos.png"
         alt=""
       />
       <img
-        class="Eventos__itemevento-proximo c2"
+        class="Eventos__itemevento-proximo c2 img-fluid"
         src="@/assets/Component2Eventos.png"
         alt=""
       />
     </div>
     <div class="Eventos__seccion-premios">
       <h1>Redime los puntos por premios</h1>
-      <img src="@/assets/Component3Eventos.png" alt="" />
-      <button class="Eventos__seccionpremios-btn">
+      <img class="img-fluid" src="@/assets/Component3Eventos.png" alt="" />
+      <button class="Eventos__seccionpremios-btn" @click="$router.push('/premios')">
         <p>Ver catálogo completo</p>
       </button>
     </div>
@@ -45,7 +45,7 @@ export default {
     };
   },
   mounted() {
-    fetch("https://my-json-server.typicode.com/DarkNikT/fakeapi-appweb/eventos")
+    fetch(process.env.VUE_APP_ROOT_API + "/eventos")
       .then((res) => res.json())
       .then((data) => {
         this.lista_eventos = data;
@@ -56,6 +56,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .Eventos {
   background-image: linear-gradient(
     -6deg,
@@ -113,7 +114,7 @@ export default {
   border-radius: 10px;
   border: none;
   font-family: "Assistant", sans-serif;
-  font-size: 48px;
+  font-size: 24px;
   padding: 5px 50px;
   color: white;
   font-weight: 700;
