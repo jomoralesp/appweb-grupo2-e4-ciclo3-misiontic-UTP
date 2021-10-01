@@ -142,6 +142,7 @@ app.get('/api/premios', function (req, res) {
 });
 app.get('/api/eventos', function (req, res) {
   res.json(dataEventos);
+  console.log("conulta");
 });
 
 // Error 404
