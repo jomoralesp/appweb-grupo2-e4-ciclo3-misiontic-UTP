@@ -36,7 +36,7 @@
 
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
         <CrudEventos v-show="isOpenSection('Eventos')"></CrudEventos>
-
+        <CrudPremios v-show="isOpenSection('Premios')"></CrudPremios>
         <DashBoardInicio v-show="isOpenSection('Inicio')"></DashBoardInicio>
       </main>
     </div>
@@ -45,10 +45,12 @@
 <script>
 import DashBoardInicio from "../components/DashboardInicio.vue";
 import CrudEventos from "../components/CrudEventos.vue";
+import CrudPremios from "../components/CrudPremios.vue";
 export default {
   data() {
     return {
       sectionOpen: "Inicio",
+      showMainTable: true,
     };
   },
   methods: {
@@ -63,6 +65,7 @@ export default {
   components: {
     DashBoardInicio,
     CrudEventos,
+    CrudPremios,
   },
 };
 </script>

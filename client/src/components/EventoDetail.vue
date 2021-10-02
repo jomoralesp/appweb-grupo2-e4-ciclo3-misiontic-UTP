@@ -2,7 +2,9 @@
   <div>
     <button @click="$emit('cerrarDetalle')">cerrar</button>
     <h2>{{ idEvento }}</h2>
-    <p>{{ dataEventoId }}</p>
+    <h2>{{ dataEventoId.titulo }}</h2>
+    <h2>{{ dataEventoId.path_foto }}</h2>
+
     <button @click="$emit('editarEvento')">Editar</button>
     <button @click="$emit('eliminarEvento')">Eliminar</button>
   </div>

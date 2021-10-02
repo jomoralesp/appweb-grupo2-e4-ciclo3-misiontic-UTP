@@ -3,52 +3,48 @@
     <div
       class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom"
     >
-      <h1 class="h2">Eventos</h1>
+      <h1 class="h2">Premios</h1>
       <div class="btn-toolbar mb-2 mb-md-0">
-        <div class="btn-group mr-2" v-show="showListadoEventos">
-          <button class="btn btn-sm btn-outline-secondary" @click="consultarEventos">
+        <div class="btn-group mr-2" v-show="showListadoPremios">
+          <button class="btn btn-sm btn-outline-secondary" @click="consultarPremios">
             Actualizar
           </button>
           <button class="btn btn-sm btn-outline-secondary" @click="openNewForm()">
-            Nuevo Evento
+            Nuevo Premio
           </button>
         </div>
       </div>
     </div>
-    <EventoForm
-      :categorias="listaCategoriaEventos"
-      :tipos="listaTipoEventos"
-      :sucursales="listaSucursales"
-      v-if="showFormEvento"
+    <PremioForm
+      :categorias="listaCategoriaPremios"
+      v-if="showFormPremio"
       @cerrarForm="closeForm"
-      @actualizarListado="consultarEventos"
-      :idEvento="eventoSelect"
-      :dataEvento="dataEventSelected"
-    ></EventoForm>
-    <EventoNewForm
-      :categorias="listaCategoriaEventos"
-      :tipos="listaTipoEventos"
-      :sucursales="listaSucursales"
+      @actualizarListado="consultarPremios"
+      :idEvento="premioSelect"
+      :dataEvento="dataPremioSelected"
+    ></PremioForm>
+    <PremioNewForm
+      :categorias="listaCategoriaPremios"
       v-show="showNewFormEvento"
       @cerrarForm="closeForm"
-    ></EventoNewForm>
-    <EventoDetail
-      :idEvento="eventoSelect"
-      :dataEventoId="dataEventSelected"
+    ></PremioNewForm>
+    <PremioDetail
+      :idEvento="premioSelect"
+      :dataEventoId="dataPremioSelected"
       v-show="showDetailEvento"
       @cerrarDetalle="closeDetail"
-      @editarEvento="openForm(eventoSelect)"
-      @eliminarEvento="deleteEvento(eventoSelect)"
-    ></EventoDetail>
-    <div class="Seccion-tabla" v-show="!errorConsulta && showListadoEventos">
-      <h2>Tabla de eventos</h2>
+      @editarEvento="openForm(premioSelect)"
+      @eliminarEvento="deleteEvento(premioSelect)"
+    ></PremioDetail>
+    <div class="Seccion-tabla" v-show="!errorConsulta && showListadoPremios">
+      <h2>Tabla de premios</h2>
       <div class="table-responsive">
         <table class="table table-sm">
           <thead>
             <tr>
               <th>#</th>
               <th>Nombre</th>
-              <th>Fecha</th>
+              <th>Cantidad</th>
               <th>Valor puntos</th>
               <th>Acciones</th>
             </tr>
@@ -57,7 +53,7 @@
             <tr
               v-for="(evento, index) in listaEventos"
               :key="evento._id"
-              :class="evento.disponible ? ' table-success' : 'table-warning'"
+              :class="evento.visible ? ' table-success' : 'table-warning'"
             >
               <td>{{ index + 1 }}</td>
               <td>{{ evento.titulo }}</td>
@@ -90,57 +86,53 @@
 </template>
 <script>
 //importando componentes
-import EventoForm from "../components/EventoForm.vue";
-import EventoDetail from "../components/EventoDetail.vue";
-import EventoNewForm from "../components/EventoNewForm.vue";
+import PremioForm from "../components/PremioForm.vue";
+import PremioDetail from "../components/PremioDetail.vue";
+import PremioNewForm from "../components/PremioNewForm.vue";
 import axios from "axios";
 
 export default {
   components: {
-    EventoForm,
-    EventoDetail,
-    EventoNewForm,
+    PremioForm,
+    PremioDetail,
+    PremioNewForm,
   },
   data() {
     return {
-      eventoSelect: "",
-      dataEventSelected: {},
+      premioSelect: "",
+      dataPremioSelected: {},
 
       listaEventos: [],
 
       datosVacios: true,
       errorConsulta: false,
 
-      listaCategoriaEventos: [],
-      listaTipoEventos: [],
-      listaSucursales: [],
+      listaCategoriaPremios: [],
 
-      showListadoEventos: true,
+      showListadoPremios: true,
       showDetailEvento: false,
-      showFormEvento: false,
+      showFormPremio: false,
       showNewFormEvento: false,
     };
   },
   mounted() {
-    this.consultarEventos();
+    this.consultarPremios();
     this.consultarCategoria();
-    this.consultarTipos();
-    this.consultarSucursales();
   },
   methods: {
     openDetail(id) {
-      this.eventoSelect = id;
+      this.premioSelect = id;
       console.log(id);
-      fetch(process.env.VUE_APP_ROOT_API + "/eventos/full/" + this.eventoSelect)
+      fetch(process.env.VUE_APP_ROOT_API + "/eventos/full/" + this.premioSelect)
         //   fetch(
         //     "https://my-json-server.typicode.com/DarkNikT/fakeapi-appweb/eventos/" +
-        //       this.eventoSelect
+        //       this.premioSelect
         //   )
         .then((res) => res.json())
         .then((data) => {
-          this.dataEventSelected = data;
+          this.dataPremioSelected = data;
 
-          if (this.dataEventSelected.length != 0) {
+          if (this.dataPremioSelected.length != 0) {
             console.log("Hay sin datos " + id);
           } else {
             console.log("No hay datos");
@@ -151,55 +143,55 @@ export default {
         });
 
       this.showDetailEvento = true;
-      this.showFormEvento = false;
-      this.showListadoEventos = false;
+      this.showFormPremio = false;
+      this.showListadoPremios = false;
       this.showNewFormEvento = false;
     },
     closeDetail() {
       this.showDetailEvento = false;
-      this.showFormEvento = false;
+      this.showFormPremio = false;
       this.showNewFormEvento = false;
-      this.showListadoEventos = true;
+      this.showListadoPremios = true;
     },
 
     openForm(id) {
-      this.eventoSelect = id;
-      fetch(process.env.VUE_APP_ROOT_API + "/eventos/full/" + this.eventoSelect)
+      this.premioSelect = id;
+      fetch(process.env.VUE_APP_ROOT_API + "/premios/" + this.premioSelect)
         .then((res) => res.json())
         .then((data) => {
-          this.dataEventSelected = data;
+          this.dataPremioSelected = data;
         })
         .catch((error) => {
           console.error(error);
         });
       this.showDetailEvento = false;
-      this.showFormEvento = true;
-      this.showListadoEventos = false;
+      this.showFormPremio = true;
+      this.showListadoPremios = false;
       this.showNewFormEvento = false;
     },
     closeForm() {
       this.showDetailEvento = false;
-      this.showFormEvento = false;
-      this.showListadoEventos = true;
+      this.showFormPremio = false;
+      this.showListadoPremios = true;
       this.showNewFormEvento = false;
 
       //vaciar campos de formularios
       //actuallizar lista de eventos
-      this.consultarEventos();
+      this.consultarPremios();
     },
 
     openNewForm() {
       this.showNewFormEvento = true;
       this.showDetailEvento = false;
-      this.showFormEvento = false;
-      this.showListadoEventos = false;
+      this.showFormPremio = false;
+      this.showListadoPremios = false;
     },
     //consulta a la base de datos
-    consultarEventos() {
+    consultarPremios() {
       //
 
       //fetch("https://my-json-server.typicode.com/DarkNikT/fakeapi-appweb/eventos")
-      fetch(process.env.VUE_APP_ROOT_API + "/eventos")
+      fetch(process.env.VUE_APP_ROOT_API + "/premios")
         .then((res) => res.json())
         .then((data) => {
           this.listaEventos = data;
@@ -224,33 +216,13 @@ export default {
       fetch(process.env.VUE_APP_ROOT_API + "/eventos/categoria/eventos")
         .then((res) => res.json())
         .then((data) => {
-          this.listaCategoriaEventos = data;
+          this.listaCategoriaPremios = data;
         })
         .catch((error) => {
           console.error(error);
         });
     },
-    consultarTipos() {
-      //hace fetch de las categorias
-      fetch(process.env.VUE_APP_ROOT_API + "/eventos/tipo/eventos")
-        .then((res) => res.json())
-        .then((data) => {
-          this.listaTipoEventos = data;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    },
-    consultarSucursales() {
-      fetch(process.env.VUE_APP_ROOT_API + "/sucursales")
-        .then((res) => res.json())
-        .then((data) => {
-          this.listaSucursales = data;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    },
+
     deleteEvento(id) {
       this.$swal("Desea eliminar el registro");
       let apiURL = `${process.env.VUE_APP_ROOT_API}/eventos/delete-event/${id}`;
