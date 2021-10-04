@@ -46,7 +46,7 @@
         <input
           type="text"
           class="form-control"
-          placeholder="Url"
+          placeholder="Detalle"
           v-model="modelPremio.detalle"
         />
       </div>
@@ -56,7 +56,7 @@
           type="number"
           class="form-control"
           placeholder="Cantidad"
-          v-model="modelPremio.cantidad"
+          v-model.number="modelPremio.cantidad"
           required
         />
       </div>
@@ -66,7 +66,7 @@
           type="number"
           class="form-control"
           placeholder="Valor puntos"
-          v-model="modelPremio.valor_puntos"
+          v-model.number="modelPremio.valor_puntos"
           required
         />
       </div>
@@ -80,8 +80,14 @@
         />
       </div>
       <div class="col-12">
-        <button @click="clearForm">Limpiar</button>
-        <button type="submit" class="btn btn-primary">"Crear"</button>
+        <select v-model="modelPremio.visible">
+          <option :value="true">Visible</option>
+          <option :value="false">Ocult0</option>
+        </select>
+      </div>
+      <div class="col-12">
+        <button class="btn btn-primary" @click="clearForm">Limpiar</button>
+        <button type="submit" class="btn btn-primary">Crear</button>
       </div>
     </form>
   </div>
@@ -120,7 +126,7 @@ export default {
     onPress() {
       console.log(this.modelPremio);
       console.log("creando registro");
-      let apiURL = `${process.env.VUE_APP_ROOT_API}/eventos/create-event/`;
+      let apiURL = `${process.env.VUE_APP_ROOT_API}/premios/create-premio/`;
       axios
         .post(apiURL, this.modelPremio)
         .then((res) => {

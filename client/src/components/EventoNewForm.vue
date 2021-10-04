@@ -108,6 +108,12 @@
           required
         />
       </div>
+      <div class="col-md6">
+        <select name="selectDisponible" v-model="modelEvento.disponible">
+          <option :value="true">Disponible</option>
+          <option :value="false">No disponible</option>
+        </select>
+      </div>
       <div class="col-12">
         <button @click="clearForm">Limpiar</button>
         <button type="submit" class="btn btn-primary">"Crear"</button>

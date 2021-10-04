@@ -20,21 +20,21 @@
       v-if="showFormPremio"
       @cerrarForm="closeForm"
       @actualizarListado="consultarPremios"
-      :idEvento="premioSelect"
-      :dataEvento="dataPremioSelected"
+      :idPremio="premioSelect"
+      :dataPremio="dataPremioSelected"
     ></PremioForm>
     <PremioNewForm
       :categorias="listaCategoriaPremios"
-      v-show="showNewFormEvento"
+      v-show="showNewFormPremio"
       @cerrarForm="closeForm"
     ></PremioNewForm>
     <PremioDetail
-      :idEvento="premioSelect"
-      :dataEventoId="dataPremioSelected"
-      v-show="showDetailEvento"
+      :idPremio="premioSelect"
+      :dataPremioId="dataPremioSelected"
+      v-show="showDetailPremio"
       @cerrarDetalle="closeDetail"
-      @editarEvento="openForm(premioSelect)"
-      @eliminarEvento="deleteEvento(premioSelect)"
+      @editarPremio="openForm(premioSelect)"
+      @eliminarPremio="deletePremio(premioSelect)"
     ></PremioDetail>
     <div class="Seccion-tabla" v-show="!errorConsulta && showListadoPremios">
       <h2>Tabla de premios</h2>
@@ -51,22 +51,22 @@
           </thead>
           <tbody v-show="!datosVacios">
             <tr
-              v-for="(evento, index) in listaEventos"
-              :key="evento._id"
-              :class="evento.visible ? ' table-success' : 'table-warning'"
+              v-for="(premio, index) in listaPremios"
+              :key="premio._id"
+              :class="premio.visible ? ' table-success' : 'table-warning'"
             >
               <td>{{ index + 1 }}</td>
-              <td>{{ evento.titulo }}</td>
-              <td>{{ evento.categoria }}</td>
-              <td>{{ evento.valor_puntos }}</td>
+              <td>{{ premio.nombre }}</td>
+              <td>{{ premio.cantidad }}</td>
+              <td>{{ premio.valor_puntos }}</td>
               <td>
-                <button @click="openDetail(evento._id)">
+                <button @click="openDetail(premio._id)">
                   <span class="mdi mdi-eye" alt></span>
                 </button>
-                <button @click="openForm(evento._id)">
+                <button @click="openForm(premio._id)">
                   <span class="mdi mdi-lead-pencil"></span>
                 </button>
-                <button @click="deleteEvento(evento._id)">
+                <button @click="deletePremio(premio._id)">
                   <span class="mdi mdi-trash-can-outline"></span>
                 </button>
               </td>
@@ -102,7 +102,7 @@ export default {
       premioSelect: "",
       dataPremioSelected: {},
 
-      listaEventos: [],
+      listaPremios: [],
 
       datosVacios: true,
       errorConsulta: false,
@@ -110,9 +110,9 @@ export default {
       listaCategoriaPremios: [],
 
       showListadoPremios: true,
-      showDetailEvento: false,
+      showDetailPremio: false,
       showFormPremio: false,
-      showNewFormEvento: false,
+      showNewFormPremio: false,
     };
   },
   mounted() {
@@ -123,13 +123,14 @@ export default {
     openDetail(id) {
       this.premioSelect = id;
       console.log(id);
-      fetch(process.env.VUE_APP_ROOT_API + "/eventos/full/" + this.premioSelect)
+      fetch(process.env.VUE_APP_ROOT_API + "/premios/full/" + this.premioSelect)
         //   fetch(
         //     "https://my-json-server.typicode.com/DarkNikT/fakeapi-appweb/eventos/" +
         //       this.premioSelect
         //   )
         .then((res) => res.json())
         .then((data) => {
+          console.log(data);
           this.dataPremioSelected = data;
 
           if (this.dataPremioSelected.length != 0) {
@@ -142,21 +143,21 @@ export default {
           console.error(error);
         });
 
-      this.showDetailEvento = true;
+      this.showDetailPremio = true;
       this.showFormPremio = false;
       this.showListadoPremios = false;
-      this.showNewFormEvento = false;
+      this.showNewFormPremio = false;
     },
     closeDetail() {
-      this.showDetailEvento = false;
+      this.showDetailPremio = false;
       this.showFormPremio = false;
-      this.showNewFormEvento = false;
+      this.showNewFormPremio = false;
       this.showListadoPremios = true;
     },
 
     openForm(id) {
       this.premioSelect = id;
-      fetch(process.env.VUE_APP_ROOT_API + "/premios/" + this.premioSelect)
+      fetch(process.env.VUE_APP_ROOT_API + "/premios/full/" + this.premioSelect)
         .then((res) => res.json())
         .then((data) => {
           this.dataPremioSelected = data;
@@ -164,25 +165,25 @@ export default {
         .catch((error) => {
           console.error(error);
         });
-      this.showDetailEvento = false;
+      this.showDetailPremio = false;
       this.showFormPremio = true;
       this.showListadoPremios = false;
-      this.showNewFormEvento = false;
+      this.showNewFormPremio = false;
     },
     closeForm() {
-      this.showDetailEvento = false;
-      this.showFormPremio = false;
-      this.showListadoPremios = true;
-      this.showNewFormEvento = false;
-
-      //vaciar campos de formularios
       //actuallizar lista de eventos
       this.consultarPremios();
+      this.showDetailPremio = false;
+      this.showFormPremio = false;
+      this.showListadoPremios = true;
+      this.showNewFormPremio = false;
+
+      //vaciar campos de formularios
     },
 
     openNewForm() {
-      this.showNewFormEvento = true;
-      this.showDetailEvento = false;
+      this.showNewFormPremio = true;
+      this.showDetailPremio = false;
       this.showFormPremio = false;
       this.showListadoPremios = false;
     },
@@ -194,9 +195,9 @@ export default {
       fetch(process.env.VUE_APP_ROOT_API + "/premios")
         .then((res) => res.json())
         .then((data) => {
-          this.listaEventos = data;
+          this.listaPremios = data;
 
-          if (this.listaEventos.length != 0) {
+          if (this.listaPremios.length != 0) {
             this.datosVacios = false;
           } else {
             this.datosVacios = true;
@@ -208,12 +209,12 @@ export default {
           this.errorConsulta = true;
         });
 
-      console.log(this.listaEventos);
+      console.log(this.listaPremios);
     },
 
     consultarCategoria() {
       //hace fetch de las categorias
-      fetch(process.env.VUE_APP_ROOT_API + "/eventos/categoria/eventos")
+      fetch(process.env.VUE_APP_ROOT_API + "/premios/categoria/premios")
         .then((res) => res.json())
         .then((data) => {
           this.listaCategoriaPremios = data;
@@ -223,14 +224,14 @@ export default {
         });
     },
 
-    deleteEvento(id) {
+    deletePremio(id) {
       this.$swal("Desea eliminar el registro");
-      let apiURL = `${process.env.VUE_APP_ROOT_API}/eventos/delete-event/${id}`;
+      let apiURL = `${process.env.VUE_APP_ROOT_API}/premios/delete-premio/${id}`;
       axios.delete(apiURL).then((res) => {
         console.log(res);
-        this.$swal("Evento eliminado con éxito");
+        this.$swal("Premio eliminado con éxito");
       });
-      this.consultarEventos();
+      this.consultarPremios();
       this.closeForm();
     },
   },
