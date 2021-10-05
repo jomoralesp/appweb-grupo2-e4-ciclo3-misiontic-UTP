@@ -210,18 +210,6 @@ export default {
             );
           }
         });
-
-      let apiURL = `${process.env.VUE_APP_ROOT_API}/eventos/create-event/`;
-      axios
-        .post(apiURL, this.modelEvento)
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      this.clearForm();
-      this.$emit("cerrarForm");
     },
   },
 };
