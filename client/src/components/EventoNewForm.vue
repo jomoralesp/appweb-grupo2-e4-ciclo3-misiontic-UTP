@@ -165,6 +165,52 @@ export default {
       this.modelEvento.valor_puntos = parseInt(this.modelEvento.valor_puntos);
       console.log(this.modelEvento);
       console.log("creando registro");
+
+      const swalWithBootstrapButtons = this.$swal.mixin({
+        customClass: {
+          confirmButton: "btn btn-success mx-2",
+          cancelButton: "btn btn-danger mx-2",
+        },
+        buttonsStyling: false,
+      });
+      swalWithBootstrapButtons
+        .fire({
+          title: "Está seguro?",
+          text: "Está a punto de crear un registro",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Si,crealo!",
+          cancelButtonText: "No, cancelar!",
+          reverseButtons: true,
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            //Aquí el código para revisar ai se borró o no
+            let apiURL = `${process.env.VUE_APP_ROOT_API}/eventos/create-event/`;
+            axios
+              .post(apiURL, this.modelEvento)
+              .then((res) => {
+                console.log(res);
+                this.$swal("Premio creado con exito");
+              })
+              .catch((error) => {
+                console.log(error);
+                this.$swal("Ha ocurrido un error creando el registro");
+              });
+            this.clearForm();
+            this.$emit("cerrarForm");
+          } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === this.$swal.DismissReason.cancel
+          ) {
+            swalWithBootstrapButtons.fire(
+              "Enhorabuena",
+              "El registro no será creado",
+              "error"
+            );
+          }
+        });
+
       let apiURL = `${process.env.VUE_APP_ROOT_API}/eventos/create-event/`;
       axios
         .post(apiURL, this.modelEvento)

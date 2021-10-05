@@ -225,14 +225,53 @@ export default {
     },
 
     deletePremio(id) {
-      this.$swal("Desea eliminar el registro");
-      let apiURL = `${process.env.VUE_APP_ROOT_API}/premios/delete-premio/${id}`;
-      axios.delete(apiURL).then((res) => {
-        console.log(res);
-        this.$swal("Premio eliminado con éxito");
+      const swalWithBootstrapButtons = this.$swal.mixin({
+        customClass: {
+          confirmButton: "btn btn-success mx-2",
+          cancelButton: "btn btn-danger mx-2",
+        },
+        buttonsStyling: false,
       });
-      this.consultarPremios();
-      this.closeForm();
+      swalWithBootstrapButtons
+        .fire({
+          title: "Está seguro?",
+          text: "Está a punto de eliminar un registro",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Si, borralo!",
+          cancelButtonText: "No, cancelar!",
+          reverseButtons: true,
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            //Aquí el código para revisar ai se borró o no
+            let apiURL = `${process.env.VUE_APP_ROOT_API}/premios/delete-premio/${id}`;
+            axios
+              .delete(apiURL)
+              .then((res) => {
+                console.log(res);
+                swalWithBootstrapButtons.fire(
+                  "Eliminado!",
+                  "El registro ha sido eliminado.",
+                  "success"
+                );
+                this.consultarPremios();
+                this.closeForm();
+              })
+              .catch((e) => {
+                this.$swal("Premio no eliminado ha ocurrido un error");
+              });
+          } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === this.$swal.DismissReason.cancel
+          ) {
+            swalWithBootstrapButtons.fire(
+              "Enhorabuena",
+              "El registro no será eliminado",
+              "error"
+            );
+          }
+        });
     },
   },
 };

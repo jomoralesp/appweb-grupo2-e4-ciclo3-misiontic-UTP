@@ -24,20 +24,14 @@
                 Eventos
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#"> Reporte </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#"> Integrations </a>
-            </li>
           </ul>
         </div>
       </nav>
-
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
         <CrudEventos v-show="isOpenSection('Eventos')"></CrudEventos>
         <CrudPremios v-show="isOpenSection('Premios')"></CrudPremios>
         <DashBoardInicio v-show="isOpenSection('Inicio')"></DashBoardInicio>
+        <ReporteUsuarios v-show="isOpenSection('Usuarios')"></ReporteUsuarios>
       </main>
     </div>
   </div>
@@ -46,6 +40,7 @@
 import DashBoardInicio from "../components/DashboardInicio.vue";
 import CrudEventos from "../components/CrudEventos.vue";
 import CrudPremios from "../components/CrudPremios.vue";
+import ReporteUsuarios from "../components/ReporteUsuarios.vue";
 export default {
   data() {
     return {
@@ -66,6 +61,7 @@ export default {
     DashBoardInicio,
     CrudEventos,
     CrudPremios,
+    ReporteUsuarios,
   },
 };
 </script>

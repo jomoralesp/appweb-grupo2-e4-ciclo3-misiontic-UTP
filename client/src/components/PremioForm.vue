@@ -123,21 +123,52 @@ export default {
       console.log("Se va a actualizar");
       console.log(this.dataPremioSelected);
 
-      let apiURL = `${process.env.VUE_APP_ROOT_API}/premios/update-premio/${this.idPremio}`;
-      let dataPut = { ...this.dataPremioSelected };
-      delete dataPut._id;
-      axios
-        .put(apiURL, dataPut)
-        .then((res) => {
-          console.log(res);
-          this.$swal("Premio registrado con exito");
+      const swalWithBootstrapButtons = this.$swal.mixin({
+        customClass: {
+          confirmButton: "btn btn-success mx-2",
+          cancelButton: "btn btn-danger mx-2",
+        },
+        buttonsStyling: false,
+      });
+      swalWithBootstrapButtons
+        .fire({
+          title: "Está seguro?",
+          text: "Está a punto de editar un registro",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Si, editalo!",
+          cancelButtonText: "No, cancelar!",
+          reverseButtons: true,
         })
-        .catch((error) => {
-          console.log(error);
-          this.$swal("Error registrando premio");
+        .then((result) => {
+          if (result.isConfirmed) {
+            //Aquí el código para revisar ai se borró o no
+            let apiURL = `${process.env.VUE_APP_ROOT_API}/premios/update-premio/${this.idPremio}`;
+            let dataPut = { ...this.dataPremioSelected };
+            delete dataPut._id;
+            axios
+              .put(apiURL, dataPut)
+              .then((res) => {
+                console.log(res);
+                this.$swal("Premio modificado con exito");
+              })
+              .catch((error) => {
+                console.log(error);
+                this.$swal("Error modificando premio");
+              });
+            this.$emit("actualizarListado");
+            this.$emit("cerrarForm");
+          } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === this.$swal.DismissReason.cancel
+          ) {
+            swalWithBootstrapButtons.fire(
+              "Enhorabuena",
+              "El registro no será modificado",
+              "error"
+            );
+          }
         });
-      this.$emit("actualizarListado");
-      this.$emit("cerrarForm");
     },
   },
 };
