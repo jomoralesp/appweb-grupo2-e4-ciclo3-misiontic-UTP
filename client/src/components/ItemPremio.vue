@@ -10,7 +10,7 @@
           AGOTADO
         </h1>
         <!-- IMagen del premio -->
-        <img class="img-fluid" :src="urlServer + dataPremio.path_foto" alt="" />
+        <img class="img-fluid" :src="urlServer" alt="" />
       </div>
       <div class="ItemPremio_puntos card-body">
         <p class="fs-6 mb-0">PUNTOS</p>
@@ -21,6 +21,7 @@
   </router-link>
 </template>
 <script>
+import axios from "axios";
 export default {
   props: ["dataPremio"],
   data() {
@@ -29,7 +30,34 @@ export default {
     };
   },
   mounted() {
-    this.urlServer = process.env.VUE_APP_ROOT_API;
+    this.urlServer = process.env.VUE_APP_ROOT;
+
+    axios
+      .get(this.urlServer + this.dataPremio.path_foto, { responseType: "arraybuffer" })
+      .then((response) => {
+        const base64 = btoa(
+          new Uint8Array(response.data).reduce(
+            (data, byte) => data + String.fromCharCode(byte),
+            ""
+          )
+        );
+        this.urlServer = "data:;base64," + base64;
+      })
+      .catch((e) => {
+        axios
+          .get(this.urlServer + "/static/images/cross.jpg", {
+            responseType: "arraybuffer",
+          })
+          .then((response) => {
+            const base64 = btoa(
+              new Uint8Array(response.data).reduce(
+                (data, byte) => data + String.fromCharCode(byte),
+                ""
+              )
+            );
+            this.urlServer = "data:;base64," + base64;
+          });
+      });
   },
   methods: {
     showAlert() {
