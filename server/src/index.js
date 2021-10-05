@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-const mongoose = require("mongoose");
 const database = require("./database");
 const morgan = require('morgan');
 const path = require('path');
@@ -11,21 +10,7 @@ const port = config.PORT;
 //URL del storage de las imagenes
 const HOST_SERVER = config.HOST+":"+config.PORT;
 
-// Connect mongoDB
-mongoose.Promise = global.Promise;
-mongoose
-    .connect(database.db, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
-    .then(
-        () => {
-            console.log("Database connected");
-        },
-        (error) => {
-            console.log("Database could't be connected to: " + error);
-        }
-    );
+
 
 //ruta
 const premioAPI = require("./routes/premio.router");
