@@ -116,9 +116,27 @@ eventoRoute.route("/:id").get((req, res, next) => {
                 }
             },
             {
+                $lookup: {
+
+                    from: 'sucursales',
+                    localField: 'id_sucursal',
+                    foreignField: '_id',
+                    as: 'sucursal'
+
+                }
+            },
+            {
+                $unwind: {
+                    path: "$sucursal",
+                }
+            },
+            {
                 $project: {
                     titulo: '$titulo',
                     categoria: '$categoria.nombre',
+                    sucursal: '$sucursal.nombre',
+                    fecha_inicio: '$fecha_inicio',
+                    fecha_fin: '$fecha_fin',
                     tipo: "$tipo.tipoEvento",
                     path_foto: '$path_foto',
                     cantidad: '$cantidad',
