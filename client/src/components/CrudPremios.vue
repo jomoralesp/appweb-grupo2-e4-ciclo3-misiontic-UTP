@@ -37,7 +37,7 @@
       @eliminarPremio="deletePremio(premioSelect)"
     ></PremioDetail>
     <div class="Seccion-tabla" v-show="!errorConsulta && showListadoPremios">
-      <h2>Tabla de premios</h2>
+      <h2>Tabla de Premios</h2>
       <div class="table-responsive">
         <table class="table table-sm">
           <thead>
@@ -55,19 +55,19 @@
               :key="premio._id"
               :class="premio.visible ? ' table-success' : 'table-warning'"
             >
-              <td>{{ index + 1 }}</td>
-              <td>{{ premio.nombre }}</td>
-              <td>{{ premio.cantidad }}</td>
-              <td>{{ premio.valor_puntos }}</td>
-              <td>
-                <button @click="openDetail(premio._id)">
-                  <span class="mdi mdi-eye" alt></span>
+              <td class="align-middle">{{ index + 1 }}</td>
+              <td class="align-middle">{{ premio.nombre }}</td>
+              <td class="align-middle">{{ premio.cantidad }}</td>
+              <td class="align-middle">{{ premio.valor_puntos }}</td>
+              <td class="d-flex justify-content-center">
+                <button class= "btn" @click="openDetail(premio._id)">
+                  <span class="mdi mdi-eye text-primary fs-4" alt></span>
                 </button>
-                <button @click="openForm(premio._id)">
-                  <span class="mdi mdi-lead-pencil"></span>
+                <button class= "btn mx-3" @click="openForm(premio._id)">
+                  <span class="mdi mdi-lead-pencil text-secondary fs-4"></span>
                 </button>
-                <button @click="deletePremio(premio._id)">
-                  <span class="mdi mdi-trash-can-outline"></span>
+                <button class= "btn" @click="deletePremio(premio._id)">
+                  <span class="mdi mdi-trash-can-outline text-danger fs-4"></span>
                 </button>
               </td>
             </tr>
@@ -123,7 +123,7 @@ export default {
     openDetail(id) {
       this.premioSelect = id;
       console.log(id);
-      fetch(process.env.VUE_APP_ROOT_API + "/premios/full/" + this.premioSelect)
+      fetch(process.env.VUE_APP_ROOT_API + "/premios/" + this.premioSelect)
         //   fetch(
         //     "https://my-json-server.typicode.com/DarkNikT/fakeapi-appweb/eventos/" +
         //       this.premioSelect
@@ -259,7 +259,7 @@ export default {
                 this.closeForm();
               })
               .catch((e) => {
-                this.$swal("Premio no eliminado ha ocurrido un error");
+                this.$swal("Premio no eliminado, ha ocurrido un error");
               });
           } else if (
             /* Read more about handling dismissals below */
