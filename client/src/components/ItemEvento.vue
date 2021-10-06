@@ -2,7 +2,11 @@
   <button @click="handleClick">
     <div class="Eventos__item">
       <div class="Eventos__ItemEvento-img">
-        <img :src="urlServer + dataEvento.path_foto" alt="" />
+        <!-- :src="
+            urlServer + dataEvento.path_foto || urlServer + '/static/images/cross.jpg'
+          " -->
+
+        <img :src="urlServer" alt="" />
         <h2>Virtual</h2>
       </div>
       <div class="Eventos__ItemEvento-text">
@@ -21,6 +25,7 @@
 </template>
 
 <script>
+import axios from "axios";
 const path = require("path");
 export default {
   props: ["dataEvento", "simple"],
@@ -30,7 +35,34 @@ export default {
     };
   },
   mounted() {
-    this.urlServer = process.env.VUE_APP_ROOT_API;
+    this.urlServer = process.env.VUE_APP_ROOT;
+
+    axios
+      .get(this.urlServer + this.dataEvento.path_foto, { responseType: "arraybuffer" })
+      .then((response) => {
+        const base64 = btoa(
+          new Uint8Array(response.data).reduce(
+            (data, byte) => data + String.fromCharCode(byte),
+            ""
+          )
+        );
+        this.urlServer = "data:;base64," + base64;
+      })
+      .catch((e) => {
+        axios
+          .get(this.urlServer + "/static/images/cross.jpg", {
+            responseType: "arraybuffer",
+          })
+          .then((response) => {
+            const base64 = btoa(
+              new Uint8Array(response.data).reduce(
+                (data, byte) => data + String.fromCharCode(byte),
+                ""
+              )
+            );
+            this.urlServer = "data:;base64," + base64;
+          });
+      });
   },
   computed: {
     loadimage: (url) => {

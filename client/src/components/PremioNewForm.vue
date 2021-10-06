@@ -1,17 +1,6 @@
 <template>
   <div>
     <button @click="$emit('cerrarForm')">cerrar</button>
-    <!-- "_id": {
-        "$oid": "6157ddd89676b0ff6a3657ec"
-    },
-    "id_categoria": 1,
-    "nombre": "Sarten",
-    "marca": "Immusa",
-    "detalle": "Sarten de 18cm de diametro, antiaderente",
-    "path_foto": "/static/images/premios/sarten.png",
-    "cantidad": 20,
-    "valor_puntos": 200,
-    "visible": true -->
     <form class="row g-3" @submit.prevent="onPress">
       <div class="col-12">
         <input
@@ -126,17 +115,51 @@ export default {
     onPress() {
       console.log(this.modelPremio);
       console.log("creando registro");
-      let apiURL = `${process.env.VUE_APP_ROOT_API}/premios/create-premio/`;
-      axios
-        .post(apiURL, this.modelPremio)
-        .then((res) => {
-          console.log(res);
+
+      const swalWithBootstrapButtons = this.$swal.mixin({
+        customClass: {
+          confirmButton: "btn btn-success mx-2",
+          cancelButton: "btn btn-danger mx-2",
+        },
+        buttonsStyling: false,
+      });
+      swalWithBootstrapButtons
+        .fire({
+          title: "Está seguro?",
+          text: "Está a punto de crear un registro",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Si,crealo!",
+          cancelButtonText: "No, cancelar!",
+          reverseButtons: true,
         })
-        .catch((error) => {
-          console.log(error);
+        .then((result) => {
+          if (result.isConfirmed) {
+            //Aquí el código para revisar ai se borró o no
+            let apiURL = `${process.env.VUE_APP_ROOT_API}/premios/create-premio/`;
+            axios
+              .post(apiURL, this.modelPremio)
+              .then((res) => {
+                console.log(res);
+                this.$swal("Evento creado con exito");
+              })
+              .catch((error) => {
+                console.log(error);
+                this.$swal("Ha ocurrido un error creando el registro");
+              });
+            this.clearForm();
+            this.$emit("cerrarForm");
+          } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === this.$swal.DismissReason.cancel
+          ) {
+            swalWithBootstrapButtons.fire(
+              "Enhorabuena",
+              "El registro no será creado",
+              "error"
+            );
+          }
         });
-      this.clearForm();
-      this.$emit("cerrarForm");
     },
   },
 };
