@@ -7,7 +7,7 @@
       Lo sentimos, pero la página que está buscando no existe, ha sido eliminada, el
       nombre a cambiado o no está disponible temporalmente.
     </p>
-    <a href="#">Volver a la página de inicio</a>
+    <router-link to="/">Volver a la página de inicio</router-link>
   </div>
 </template>
 <style lang="scss" scoped>

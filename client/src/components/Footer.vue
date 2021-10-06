@@ -1,10 +1,10 @@
 <template>
-  <div class="container mx-0 Footer">
-    <section class="footer__div-logo">
+  <div class="mx-0 Footer px-2">
+    <section class="footer__div-logo pt-3">
       <img class="footer__div-logo-img" src="@/assets/Logo_MuevetexPuntos_2.png" alt="" />
     </section>
     <footer class="pt-5">
-      <div class="row">
+      <div class="row w-100">
         <div class="col-2">
           <h5>Section</h5>
           <ul class="nav flex-column">
@@ -86,19 +86,23 @@
         </div>
       </div>
 
-      <div class="d-flex justify-content-between py-4 my-4 border-top">
+      <div class="d-flex justify-content-between py-4 mt-4 border-top">
         <p>© 2021 Company, Inc. All rights reserved.</p>
         <ul class="list-unstyled d-flex">
           <li class="ms-3">
-            <a class="link-dark" href="#">
+            <a class="link-light" href="#">
               <span class="mdi mdi-twitter fs-2"></span>
             </a>
           </li>
           <li class="ms-3">
-            <a class="link-dark" href="#"><span class="mdi mdi-facebook fs-2"></span> </a>
+            <a class="link-light" href="#"
+              ><span class="mdi mdi-facebook fs-2"></span>
+            </a>
           </li>
           <li class="ms-3">
-            <a class="link-dark" href="#"><span class="mdi mdi-instagram fs-2"></span></a>
+            <a class="link-lightk" href="#"
+              ><span class="mdi mdi-instagram fs-2"></span
+            ></a>
           </li>
         </ul>
       </div>
@@ -112,6 +116,7 @@ export default {};
 <style scoped lang="scss">
 .Footer {
   background: $color-footer;
+  color: white;
   &.Footer__div-logo {
     display: flex;
     justify-content: left;
