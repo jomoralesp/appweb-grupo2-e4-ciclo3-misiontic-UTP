@@ -263,7 +263,7 @@ eventoRoute.route("/full/:id").get((req, res) => {
 });
 // DETALLE DE PREMIO
 eventoRoute.route("/:id").get((req, res, next) => {
-    data = premiosId[req.params.id]
+    data = eventosId[req.params.id]
     res.json(data);
 })
 

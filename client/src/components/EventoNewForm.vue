@@ -1,10 +1,14 @@
 <template>
   <div>
-    <button @click="$emit('cerrarForm')">cerrar</button>
-
+    <div class="d-flex justify-content-end">
+    <button type="button" class="btn-close pull left" aria-label="Close" @click="$emit('cerrarForm')"></button>
+    </div>
+    <p></p>
     <form class="row g-3" @submit.prevent="onPress">
-      <div class="col-12">
+      <div class="form-group">
+        <label for="titulo">Título del Evento</label>
         <input
+          id="titulo"
           type="text"
           class="form-control"
           placeholder="Titulo"
@@ -13,6 +17,7 @@
         />
       </div>
       <div class="col-12" v-show="modelEvento.id_tipo === 1 ? false : true">
+        <label>Lugar del Evento</label>
         <input
           type="text"
           class="form-control"
@@ -40,6 +45,7 @@
         </select>
       </div>
       <div class="col-12" v-show="modelEvento.id_tipo != 2 ? true : false">
+        <label>URL del Evento</label>
         <input
           type="text"
           class="form-control"
@@ -55,6 +61,7 @@
         </select>
       </div>
       <div class="col-md-6">
+        <label>Cupos</label>
         <input
           type="number"
           class="form-control"
@@ -65,6 +72,7 @@
       </div>
 
       <div class="col-md-6">
+        <label>Valor de Puntos</label>
         <input
           type="number"
           class="form-control"
@@ -74,16 +82,17 @@
         />
       </div>
       <div class="col-12">
+        <label>Ruta de la Imagen</label>
         <input
           type="text"
           class="form-control"
-          placeholder="Path image"
+          placeholder="Path Image"
           v-model="modelEvento.path_foto"
           required
         />
       </div>
       <div class="col-md-6">
-        <label for="fechaInicio">Fecha de inicio</label>
+        <label for="fechaInicio">Fecha de Inicio</label>
         <input
           id="fechaInicio"
           type="datetime-local"
@@ -96,7 +105,7 @@
         />
       </div>
       <div class="col-md-6">
-        <label for="fecha-fin">Fecha de finalización</label>
+        <label for="fecha-fin">Fecha de Finalización</label>
         <input
           id="fecha-fin"
           type="datetime-local"

@@ -1,15 +1,17 @@
 <template>
   <div>
-    <button @click="$emit('cerrarDetalle')">cerrar</button>
-    <div class="row justify-content-center">
-      <div class="col-4">
+    <div class="d-flex justify-content-end">
+      <button type="button" class="btn-close pull left" aria-label="Close" @click="$emit('cerrarDetalle')"></button>
+    </div>
+    <p></p>
+    <div class="d-flex justify-content-center">
       <div class="card" style="width: 18rem;">
         <img class="card-img-top" :src="urlImagen" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title">{{ dataPremioId[0].nombre }}</h5>
           <p class="card-text">{{dataPremioId[0].detalle}}</p>
         </div>
-        <table class="table table-bordered">
+        <table class="card-table table-bordered">
           <tbody>
             <tr>
               <th scope="row">Categoria</th>
@@ -30,16 +32,15 @@
           </tbody>
         </table>
       </div>
-      </div>
-      </div>
-      <div class="col-4 d-flex align-items-center">
-        <div class="d-flex flex-columns">
-          <button class="btn btn-warning btn-block" @click="$emit('editarPremio')">Editar</button>
-          <button class="btn btn-danger btn-block" @click="$emit('eliminarPremio')">Eliminar</button>
-        </div>
-      </div>
     </div>
+    <p></p>
+    <div> 
+      <button type="button" class="btn btn-outline-warning  m-3" @click="$emit('editarPremio')">Editar</button>
+      <button type="button" class="btn btn-outline-danger  m-3" @click="$emit('eliminarPremio')">Eliminar</button>
+    </div>
+  </div>
 </template>
+
 <script>
 
 import axios from "axios";
@@ -86,3 +87,4 @@ export default {
   },
 };
 </script>
+

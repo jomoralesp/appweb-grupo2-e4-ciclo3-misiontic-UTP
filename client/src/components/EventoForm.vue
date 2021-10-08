@@ -1,7 +1,9 @@
 <template>
   <div>
-    <button @click="$emit('cerrarForm')">cerrar</button>
-
+    <div class="d-flex justify-content-end">
+    <button type="button" class="btn-close pull left" aria-label="Close" @click="$emit('cerrarForm')"></button>
+    </div>
+    <p></p>
     <form class="row g-3" @submit.prevent="onPress">
       <div class="col-12">
         <input
