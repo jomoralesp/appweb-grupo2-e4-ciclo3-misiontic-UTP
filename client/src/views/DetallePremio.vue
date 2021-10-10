@@ -1,149 +1,215 @@
 <template>
-  <div class="container">
-    <div class="container-section1">
-      <div class="container-body">
-        <div class="imagen">
-          <img
-            src="../assets/Product.png"
-            alt="Clock"
-            sizes="(min-width: 600px) 200px, 50vw"
-          />
-        </div>
-
-        <div class="caracteristica-product">
-          <div class="title">
-            <h2>Caracteristica del producto</h2>
-          </div>
-          <div class="body-caracteristicas">
-            <ul>
-              <li>Lorem ipsum dolor</li>
-              <li>Lorem ipsum dolor</li>
-              <li>Lorem ipsum dolor</li>
-              <li>Lorem ipsum dolor</li>
-            </ul>
-          </div>
-          <hr />
-        </div>
-
-        <div class="descripcion">
-          <div class="title-descripcion">
-            <h2>Descripcion</h2>
-          </div>
-          <div class="body-descripcion">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. At lobortis vehicula
-            erat amet non netus eros. Proin felis consequat nulla cursus sed. Vel, commodo
-            dignissim et tincidunt magna consectetur. Pellentesque sapien viverra nulla
-            accumsan nibh. Nibh sed tristique libero eget nec, neque orci id dictum. In
-            dignissim pellentesque viverra eget varius eu. Egestas nisi, quis maecenas et
-            aliquam sed. Massa sagittis, amet, ultrices enim ut nisl nulla condimentum
-            consequat. Ut sed et quam est augue risus. Volutpat senectus purus tortor duis
-            quis in proin. Duis nunc facilisis interdum euismod volutpat, venenatis. Dui,
-            dignissim gravida eu commodo ultrices. Habitasse pretium lorem posuere viverra
-            pretium quisque. Donec aenean felis, netus risus velit, tortor purus diam.
-            Proin gravida diam et tincidunt viverra. Bibendum non ut est, in. Pellentesque
-            eu faucibus pharetra turpis nunc massa lectus dis praesent. Massa suscipit vel
-            gravida neque, ut lacus odio nisl. Placerat at augue sit mus lacus quam
-            aliquet. Gravida aliquam ac.
-          </div>
-        </div>
-
-        <div class="detalle-premio">
-          <div class="nombre-premio">
-            <p class="h4">Nombre premio</p>
+  <div>
+    <div v-show="!dataPremios ? true : false" class="container-loading">
+      <grid-loader
+        class="Spinner__loading"
+        :loading="dataPremios ? false : true"
+        :color="colorLoading"
+        size="40px"
+        style="background-color: white"
+      ></grid-loader>
+    </div>
+    <div class="container" v-if="!dataPremios ? false : true">
+      <div class="container-section1">
+        <div class="container-body">
+          <div class="imagen">
+            <pulse-loader
+              :color="colorLoading"
+              style="margin-block: 150px"
+              :loading="imagen != '' ? false : true"
+            ></pulse-loader>
+            <img
+              v-show="imagen === '' ? false : true"
+              :src="dataPremios ? imagen : '@/assets/cross.jpg'"
+              alt="Clock"
+              sizes="(min-width: 600px) 200px, 50vw"
+            />
           </div>
 
-          <div class="start">
-            <span style="font-size: 1.5em; color: #888888">
-              <span class="mdi mdi-star"></span>
-              <span class="mdi mdi-star"></span>
-              <span class="mdi mdi-star"></span>
-              <span class="mdi mdi-star"></span>
-              <span class="mdi mdi-star"></span>
-            </span>
+          <div class="caracteristica-product">
+            <div class="title">
+              <h2>Caracteristica del producto</h2>
+            </div>
+            <div class="body-caracteristicas">
+              <ul>
+                <li>
+                  <strong> Categoria: </strong>
+                  {{ dataPremios ? dataPremios.categoria : "" }}
+                </li>
+                <li>
+                  <strong> Marca: </strong> {{ dataPremios ? dataPremios.marca : "" }}
+                </li>
+              </ul>
+            </div>
+            <hr />
           </div>
 
-          <div class="puntos">Puntos: 1.099.000</div>
-
-          <div class="envio">
-            <span style="font-size: 1.5em; color: #888888">
-              <span class="mdi mdi-truck-check-outline"></span>
-            </span>
-            <p class="px-2 m-0">Envio gratis</p>
+          <div class="descripcion">
+            <div class="title-descripcion">
+              <h2>Descripcion</h2>
+            </div>
+            <div class="body-descripcion">
+              {{ dataPremios ? dataPremios.detalle : "" }}
+            </div>
           </div>
 
-          <div class="color">Color: <span> Gris</span></div>
+          <div class="detalle-premio">
+            <div class="nombre-premio">
+              <p class="h4">{{ dataPremios ? dataPremios.nombre : "" }}</p>
+            </div>
 
-          <hr />
-
-          <div class="stock">
-            <p class="h5">Stock disponible</p>
-          </div>
-
-          <div class="cant">
-            <p>
-              Cantidades:
-              <span id="unit">1 Unidad</span>
-              <span id="dispo">(10 disponibles)</span>
-            </p>
-          </div>
-
-          <button type="button">Obtener ahora</button>
-
-          <div class="garantia">
-            <p class="mb-2">
+            <div class="start">
               <span style="font-size: 1.5em; color: #888888">
-                <span class="mdi mdi-shield-check"></span>
+                <span class="mdi mdi-star"></span>
+                <span class="mdi mdi-star"></span>
+                <span class="mdi mdi-star"></span>
+                <span class="mdi mdi-star"></span>
+                <span class="mdi mdi-star"></span>
               </span>
-              Compra protegida
-            </p>
+            </div>
 
-            <p class="mb-2">
+            <div class="puntos">
+              Puntos: {{ dataPremios ? dataPremios.valor_puntos : "" }}
+            </div>
+
+            <div class="envio">
               <span style="font-size: 1.5em; color: #888888">
-                <span class="mdi mdi-medal"></span>
+                <span class="mdi mdi-truck-check-outline"></span>
               </span>
-              Garantia de 12 meses
-            </p>
+              <p class="px-2 m-0">Envio gratis</p>
+            </div>
+
+            <div class="color">Color: <span> Gris</span></div>
+
+            <hr />
+
+            <div class="stock">
+              <p class="h5">Stock disponible</p>
+            </div>
+
+            <div class="cant">
+              <p>
+                Cantidades:
+                <span id="unit">1 Unidad</span>
+                <span id="dispo"
+                  >( {{ dataPremios ? dataPremios.cantidad : "" }} disponibles)</span
+                >
+              </p>
+            </div>
+
+            <button type="button">Obtener ahora</button>
+
+            <div class="garantia">
+              <p class="mb-2">
+                <span style="font-size: 1.5em; color: #888888">
+                  <span class="mdi mdi-shield-check"></span>
+                </span>
+                Compra protegida
+              </p>
+
+              <p class="mb-2">
+                <span style="font-size: 1.5em; color: #888888">
+                  <span class="mdi mdi-medal"></span>
+                </span>
+                Garantia de 12 meses
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="container-section">¡Gana mas puntos!</div>
-
-    <div class="container-section2">
-      <div class="body-section2">
-        <div class="imagenEvento">
-          <img
-            src="../assets/images/eventos/conciertomusicaclasica.jpg"
-            alt="Clock"
-            sizes="(min-width: 400px) 200px, 50vw"
-            align="center"
-          />
-        </div>
-        <div class="descripcion">
-          Participa en nuestros eventos, acumula puntos y gana muchos premios
-        </div>
-        <div class="masEventos">
-          <u> Ver catalogo de eventos</u>
+      <div class="container-section">¡Gana mas puntos!</div>
+      <div class="container-section2">
+        <div class="body-section2">
+          <div class="imagenEvento">
+            <img
+              src="../assets/images/Eventos/conciertoMusicaClasica.jpeg"
+              alt="Clock"
+              sizes="(min-width: 400px) 200px, 50vw"
+              align="center"
+            />
+          </div>
+          <div class="descripcion">
+            Participa en nuestros eventos, acumula puntos y gana muchos premios
+          </div>
+          <div class="masEventos">
+            <u> Ver catalogo de eventos</u>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script></script>
+<script>
+import axios from "axios";
+import PulseLoader from "vue-spinner/src/PulseLoader.vue";
+import GridLoader from "vue-spinner/src/GridLoader.vue";
+export default {
+  data() {
+    return {
+      dataPremios: undefined,
+      imagen: "",
+      colorLoading: "#242f3d",
+    };
+  },
+  components: { PulseLoader, GridLoader },
+  mounted() {
+    //para hacer que el scroll esté arriba
+    window.scrollTo(0, 0);
+    //hace llamado a la API para traer la informacion de acuerdo al id
+    fetch(process.env.VUE_APP_ROOT_API + "/premios/" + this.$route.params.id)
+      .then((res) => res.json())
+      .then((data) => {
+        this.dataPremios = data[0];
+        console.log(this.dataPremios);
+
+        //carga de imagen
+        this.urlServer = process.env.VUE_APP_ROOT;
+
+        axios
+          .get(this.urlServer + this.dataPremios.path_foto, {
+            responseType: "arraybuffer",
+          })
+          .then((response) => {
+            const base64 = btoa(
+              new Uint8Array(response.data).reduce(
+                (data, byte) => data + String.fromCharCode(byte),
+                ""
+              )
+            );
+            this.imagen = "data:;base64," + base64;
+          })
+          .catch((e) => {
+            axios
+              .get(this.urlServer + "/static/images/cross.jpg", {
+                responseType: "arraybuffer",
+              })
+              .then((response) => {
+                const base64 = btoa(
+                  new Uint8Array(response.data).reduce(
+                    (data, byte) => data + String.fromCharCode(byte),
+                    ""
+                  )
+                );
+                this.imagen = "data:;base64," + base64;
+              });
+          });
+      });
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css2?family=Allerta&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Abel&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=ABeeZee&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Allerta&display=swap");
 
 .container {
   margin: 0;
   padding: 0;
   background: #ededed;
-  background-image: url(../assets/Rectangle.svg);
+  background-image: url(../assets/images/DetalleEventoYPremio/Rectangle.svg);
   background-size: contain;
   background-position-y: -100px;
   background-repeat: no-repeat;
@@ -390,7 +456,7 @@
 }
 
 .container-section2 {
-  background-image: url(../assets/Gave.svg);
+  background-image: url(../assets/images/DetalleEventoYPremio/Gave.svg);
   background-size: contain;
   background-repeat: no-repeat;
   min-width: 800px;
@@ -426,6 +492,7 @@
 
       img {
         border-radius: 20px;
+        min-width: 90%;
       }
     }
 
@@ -467,5 +534,15 @@
       text-align: center;
     }
   }
+}
+.container-loading {
+  width: 100%;
+  height: auto;
+  background-color: white;
+  z-index: 778;
+}
+.Spinner__loading {
+  margin-block: 300px;
+  margin-inline: auto;
 }
 </style>
