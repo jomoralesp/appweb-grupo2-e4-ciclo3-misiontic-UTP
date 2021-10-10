@@ -8,8 +8,13 @@
       <div class="card" style="width: 18rem;">
         <img class="card-img-top" :src="urlImagen" alt="Card image cap">
         <div class="card-body">
+<<<<<<< HEAD
           <h5 class="card-title">{{ dataPremioId[0].nombre }}</h5>
           <p class="card-text">{{dataPremioId[0].detalle}}</p>
+=======
+          <h5 class="card-title">{{ dataPremioId[0].nombre || "titulo" }}</h5>
+          <p class="card-text">{{dataPremioId[0].detalle || "Detalle"}}</p>
+>>>>>>> a5883909207c3d28a2ff34fa3ed57ad8e5e1f40b
         </div>
         <table class="card-table table-bordered">
           <tbody>

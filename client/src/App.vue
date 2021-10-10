@@ -4,12 +4,17 @@
       :showModal="isOpenModalLogin"
       @closeLogin="closeModalLogin"
       @openRegister="toggleToRegister"
+      @hasLogin="actualizarHeader"
     ></ModalLogin>
     <ModalRegister
       :showModal="isOpenModalRegister"
       @closeRegister="closeModalRegister"
     ></ModalRegister>
+<<<<<<< HEAD
     <Header @showLogin="showModalLogin" @showRegister="showModalRegister"></Header>
+=======
+    <Header  @showLogin="showModalLogin" @showRegister="showModalRegister" :isLogin="isLogin" :userInfo = "userInfo" @hasLogout="hasLogout"></Header>
+>>>>>>> a5883909207c3d28a2ff34fa3ed57ad8e5e1f40b
     <router-view />
     <Footer></Footer>
   </div>
@@ -25,9 +30,32 @@ export default {
     return {
       isOpenModalLogin: false,
       isOpenModalRegister: false,
+      isLogin: false, 
+      userInfo: {}
     };
   },
   methods: {
+<<<<<<< HEAD
+=======
+    actualizarHeader(){
+      
+      if(localStorage.getItem("auth") === "OK"){
+        console.log("Ha ingresado el" +this.$store.state.userdata.rol +":"+this.$store.state.userdata.username);
+        this.isLogin = true;
+
+        this.userInfo = {
+          username: this.$store.state.userdata.username,
+          rol: this.$store.state.userdata.rol
+        }
+
+      }
+    },
+    hasLogout(){
+      //resetear informacion y valor booleano de login
+      this.isLogin = false;
+      this.userInfo = {};
+    },
+>>>>>>> a5883909207c3d28a2ff34fa3ed57ad8e5e1f40b
     toggleToRegister() {
       this.isOpenModalLogin = false;
       this.isOpenModalRegister = true;

@@ -1,6 +1,11 @@
 <template>
   <div class="container">
+<<<<<<< HEAD
     <div v-show="showModal" class="modal-mask" @click="$emit('closeLogin')">
+=======
+    <div v-show="showModal" class="modal-mask" @click.self="clicDrop">
+      <!-- <div id="modalLogin" v-show="showModal" class="modal-mask" @click.self="pressBg"> -->
+>>>>>>> a5883909207c3d28a2ff34fa3ed57ad8e5e1f40b
       <div class="modal-wrapper">
         <div class="modal-dialog" style="margin: 0">
           <div
@@ -24,6 +29,7 @@
                 </h2>
                 <p></p>
                 <h6 class="text-start">Ingresa con usuario y contraseña</h6>
+<<<<<<< HEAD
                 <form>
                   <div class="mb-3">
                     <input
@@ -31,10 +37,23 @@
                       type="text"
                       placeholder="Ingresa tu nombre de usuario"
                       syle="font-family: 'Abel', sans-serif"
+=======
+                <form @submit.prevent="doLogin">
+                  <div class="mb-3">
+                    <input
+                      v-model="dataForm.username"
+                      class="form-control"
+                      :class="watchInputUsername"
+                      type="text"
+                      placeholder="Ingresa tu usuario"
+                      syle="font-family: 'Abel', sans-serif"
+                      required
+>>>>>>> a5883909207c3d28a2ff34fa3ed57ad8e5e1f40b
                     />
                   </div>
                   <div class="mb-3">
                     <input
+<<<<<<< HEAD
                       class="form-control"
                       type="text"
                       placeholder="Ingresa tu contraseña"
@@ -51,6 +70,30 @@
                 <p></p>
                 <div class="d-grid gap-2">
                   <button class="btn btn-primary" type="button">Entrar</button>
+=======
+                      v-model="dataForm.password"
+                      class="form-control"
+                      :class="watchInput"
+                      type="password"
+                      placeholder="Ingresa tu contraseña"
+                      syle="font-family: 'Abel', sans-serif"
+                      required
+                    />
+                    <p v-show="errorPass">{{ errorMsg }}</p>
+                  </div>
+
+                  <p></p>
+                  <h6 class="text-start">
+                    <router-link to="" class="routerlink"
+                      >Olvidaste tu contraseña</router-link
+                    >
+                  </h6>
+                  <p></p>
+                  <button class="btn btn-primary w-100 mb-4" type="submit">Entrar</button>
+                </form>
+
+                <div class="d-grid gap-2">
+>>>>>>> a5883909207c3d28a2ff34fa3ed57ad8e5e1f40b
                   <button
                     class="btn btn-secondary"
                     type="button"
@@ -69,11 +112,15 @@
                   <p></p>
                   <p></p>
                   <div class="text-center">
+<<<<<<< HEAD
                     <img
                       class="footer__div-logo-img"
                       src="@/assets/Logo_MuevetexPuntos.png"
                       alt=""
                     />
+=======
+                    <img class="footer__div-logo-img" src="@/assets/logo.png" alt="" />
+>>>>>>> a5883909207c3d28a2ff34fa3ed57ad8e5e1f40b
                   </div>
                 </div>
               </div>
@@ -87,12 +134,101 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   props: ["showModal"],
   data() {
+<<<<<<< HEAD
     return {};
   },
   methods: {},
+=======
+    return {
+      errorPass: undefined,
+      errorLogin: undefined,
+      errorMsg: "",
+      dataForm: {
+        username: "",
+        password: "",
+      },
+    };
+  },
+  computed: {
+    watchInput() {
+      return (this.errorPass || this.errorLogin) && this.dataForm.username === ""
+        ? "is-invalid"
+        : "";
+    },
+    watchInputUsername() {
+      return this.errorLogin && this.dataForm.username === "" ? "is-invalid" : "";
+    },
+  },
+  methods: {
+    clicDrop(){
+      this.dataForm = {
+        username: '',
+        password: '',
+      };
+      this.$emit('closeLogin');
+    },
+    doLogin() {
+      //peticion
+      axios
+        .post(process.env.VUE_APP_ROOT + "/login", this.dataForm, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((res) => {
+          this.dataForm = {
+            username: "",
+            password: "",
+          };
+          this.errorLogin = false;
+          this.errorPass = false;
+          this.errorMsg = undefined;
+
+          this.$store.commit("setUser", res.data);
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("auth", "OK");
+          console.log("Datos guardados");
+          console.log(this.$store.state.userdata.username);
+
+          //cerrar modal
+          this.dataForm = {
+            username: "",
+            password: "",
+          };
+          this.$emit("hasLogin");
+          this.$emit("closeLogin");
+
+          //redirigir al home
+          if (this.$store.state.userdata.rol === "ADMIN") {
+            if (this.$route.name != "/admin") { this.$router.push("/admin").catch(()=>{});
+            }
+          } else {
+            if (this.$route.name != "/") { this.$router.push("/").catch(()=>{});}
+          }
+        })
+        .catch((error) => {
+          this.dataForm = {
+            username: "",
+            password: ""
+          };
+          console.log("Error");
+          console.log(error.message);
+          console.log(error.response);
+          this.errorLogin = true;
+          if (error.response.status === 400) {
+            this.errorMsg = error.response.data.error;
+            this.errorPass = true;
+          }
+          console.log(res.data);
+          this.errorLogin = true;
+        });
+    },
+  },
+>>>>>>> a5883909207c3d28a2ff34fa3ed57ad8e5e1f40b
 };
 </script>
 

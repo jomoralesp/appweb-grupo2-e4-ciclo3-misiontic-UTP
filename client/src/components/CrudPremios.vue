@@ -25,13 +25,13 @@
     ></PremioForm>
     <PremioNewForm
       :categorias="listaCategoriaPremios"
-      v-show="showNewFormPremio"
+      v-if="showNewFormPremio"
       @cerrarForm="closeForm"
     ></PremioNewForm>
     <PremioDetail
       :idPremio="premioSelect"
       :dataPremioId="dataPremioSelected"
-      v-show="showDetailPremio"
+      v-if="showDetailPremio"
       @cerrarDetalle="closeDetail"
       @editarPremio="openForm(premioSelect)"
       @eliminarPremio="deletePremio(premioSelect)"
@@ -60,6 +60,7 @@
               <td class="align-middle">{{ premio.cantidad }}</td>
               <td class="align-middle">{{ premio.valor_puntos }}</td>
               <td class="d-flex justify-content-center">
+<<<<<<< HEAD
                 <button class= "btn" @click="openDetail(premio._id)">
                   <span class="mdi mdi-eye text-primary fs-4" alt></span>
                 </button>
@@ -67,6 +68,15 @@
                   <span class="mdi mdi-lead-pencil text-secondary fs-4"></span>
                 </button>
                 <button class= "btn" @click="deletePremio(premio._id)">
+=======
+                <button class="btn" @click="openDetail(premio._id)">
+                  <span class="mdi mdi-eye text-primary fs-4" alt></span>
+                </button>
+                <button class="btn mx-3" @click="openForm(premio._id)">
+                  <span class="mdi mdi-lead-pencil text-secondary fs-4"></span>
+                </button>
+                <button class="btn" @click="deletePremio(premio._id)">
+>>>>>>> a5883909207c3d28a2ff34fa3ed57ad8e5e1f40b
                   <span class="mdi mdi-trash-can-outline text-danger fs-4"></span>
                 </button>
               </td>

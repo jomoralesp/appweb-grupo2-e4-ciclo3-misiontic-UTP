@@ -2,7 +2,11 @@
   <div class="container">
     <div class="imagen-banner">
       <img
+<<<<<<< HEAD
         src="../assets/images/eventos/conciertomusicaclasica.jpg"
+=======
+        :src="imagen"
+>>>>>>> a5883909207c3d28a2ff34fa3ed57ad8e5e1f40b
         alt="Clock"
         sizes="(min-width: 600px) 200px, 50vw"
         align="center"
@@ -10,7 +14,11 @@
     </div>
 
     <div class="rejilla">
+<<<<<<< HEAD
       <div class="nombreEvento">Concierto de musica clasica</div>
+=======
+      <div class="nombreEvento">{{ dataEvento ? dataEvento.titulo : "Cargando" }}</div>
+>>>>>>> a5883909207c3d28a2ff34fa3ed57ad8e5e1f40b
 
       <div class="descripcion">
         <div class="title-descripcion">
@@ -18,6 +26,7 @@
         </div>
         <hr />
         <div class="body-descripcion">
+<<<<<<< HEAD
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. At lobortis vehicula
           erat amet non netus eros. Proin felis consequat nulla cursus sed. Vel, commodo
           dignissim et tincidunt magna consectetur. Pellentesque sapien viverra nulla
@@ -32,6 +41,9 @@
           faucibus pharetra turpis nunc massa lectus dis praesent. Massa suscipit vel
           gravida neque, ut lacus odio nisl. Placerat at augue sit mus lacus quam aliquet.
           Gravida aliquam ac.
+=======
+          {{ dataEvento ? dataEvento.detalle : "detalle" }}
+>>>>>>> a5883909207c3d28a2ff34fa3ed57ad8e5e1f40b
         </div>
       </div>
 
@@ -41,10 +53,25 @@
         <hr />
 
         <ul>
+<<<<<<< HEAD
           <li>Lugar: <span> Pereira </span></li>
           <li>Fecha: <span> 1/10/2021 </span></li>
           <li>Hora: <span> 10:00 a.m. </span></li>
           <li>Puntos: <span> 5000 </span></li>
+=======
+          <li>
+            Lugar: <span> {{ dataEvento ? dataEvento.lugar : "" }} </span>
+          </li>
+          <li>
+            Fecha: <span> {{ dataEvento ? this.year : "" }} </span>
+          </li>
+          <li>
+            Hora: <span> {{ dataEvento ? this.arr[1] : "" }} </span>
+          </li>
+          <li>
+            Puntos: <span> {{ dataEvento ? dataEvento.valor_puntos : "" }} </span>
+          </li>
+>>>>>>> a5883909207c3d28a2ff34fa3ed57ad8e5e1f40b
         </ul>
 
         <hr />
@@ -57,8 +84,67 @@
   </div>
 </template>
 
+<<<<<<< HEAD
 <script></script>
 
+=======
+<script>
+import axios from "axios";
+export default {
+  data() {
+    return {
+      dataEvento: undefined,
+      imagen: "",
+    };
+  },
+  mounted() {
+    //hace llamado a la API para traer la informacion de acuerdo al id
+    fetch(process.env.VUE_APP_ROOT_API + "/eventos/" + this.$route.params.id)
+      .then((res) => res.json())
+      .then((data) => {
+        this.dataEvento = data[0];
+        console.log(this.dataEvento);
+        console.log(this.dataEvento.fecha_inicio);
+        this.arr = this.dataEvento.fecha_inicio.split("T");
+        this.year = this.arr[0].split("-").reverse().toString().replace(/,/g, "/");
+        console.log(this.year);
+
+        //carga de imagen
+        this.urlServer = process.env.VUE_APP_ROOT;
+
+        axios
+          .get(this.urlServer + this.dataEvento.path_foto, {
+            responseType: "arraybuffer",
+          })
+          .then((response) => {
+            const base64 = btoa(
+              new Uint8Array(response.data).reduce(
+                (data, byte) => data + String.fromCharCode(byte),
+                ""
+              )
+            );
+            this.imagen = "data:;base64," + base64;
+          })
+          .catch((e) => {
+            axios
+              .get(this.urlServer + "/static/images/cross.jpg", {
+                responseType: "arraybuffer",
+              })
+              .then((response) => {
+                const base64 = btoa(
+                  new Uint8Array(response.data).reduce(
+                    (data, byte) => data + String.fromCharCode(byte),
+                    ""
+                  )
+                );
+                this.imagen = "data:;base64," + base64;
+              });
+          });
+      });
+  },
+};
+</script>
+>>>>>>> a5883909207c3d28a2ff34fa3ed57ad8e5e1f40b
 <style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css2?family=Allerta&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Abel&display=swap");
@@ -69,7 +155,11 @@
   margin: 0;
   padding: 0;
   background: #ededed;
+<<<<<<< HEAD
   background-image: url(../assets/Rectangle.svg);
+=======
+  background-image: url(../assets/images/DetalleEventoYPremio/Rectangle.svg);
+>>>>>>> a5883909207c3d28a2ff34fa3ed57ad8e5e1f40b
   background-size: contain;
   background-repeat: no-repeat;
   max-width: 100%;

@@ -29,13 +29,13 @@
       :categorias="listaCategoriaEventos"
       :tipos="listaTipoEventos"
       :sucursales="listaSucursales"
-      v-show="showNewFormEvento"
+      v-if="showNewFormEvento"
       @cerrarForm="closeForm"
     ></EventoNewForm>
     <EventoDetail
       :idEvento="eventoSelect"
       :dataEventoId="dataEventSelected"
-      v-show="showDetailEvento"
+      v-if="showDetailEvento"
       @cerrarDetalle="closeDetail"
       @editarEvento="openForm(eventoSelect)"
       @eliminarEvento="deleteEvento(eventoSelect)"
