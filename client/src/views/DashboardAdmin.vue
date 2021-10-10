@@ -30,7 +30,9 @@
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
         <CrudEventos v-show="isOpenSection('Eventos')"></CrudEventos>
         <CrudPremios v-show="isOpenSection('Premios')"></CrudPremios>
-        <DashBoardInicio v-show="isOpenSection('Inicio')"></DashBoardInicio>
+        <DashBoardInicio v-show="isOpenSection('Inicio')">
+          {{ userdata }}
+        </DashBoardInicio>
         <ReporteUsuarios v-show="isOpenSection('Usuarios')"></ReporteUsuarios>
       </main>
     </div>
@@ -41,6 +43,7 @@ import DashBoardInicio from "../components/DashboardInicio.vue";
 import CrudEventos from "../components/CrudEventos.vue";
 import CrudPremios from "../components/CrudPremios.vue";
 import ReporteUsuarios from "../components/ReporteUsuarios.vue";
+import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -56,7 +59,9 @@ export default {
       return section === this.sectionOpen ? true : false;
     },
   },
-  computed: {},
+  computed: {
+    ...mapState(["userdata"]),
+  },
   components: {
     DashBoardInicio,
     CrudEventos,

@@ -1,61 +1,78 @@
 <template>
-  
-    <header class="header navbar">
-      <div class="header__navbar-brand navbar-brand">
-        <router-link to="/">
-          <img
-            class="header__navbar-brand-image"
-            src="@/assets/Logo_app.png"
-            alt=""
-          />
-        </router-link>
-      </div>
-      <div class="header__navbar_nav">
-        <nav class="">
-          <ul class="header__navbar_links">
-            <li>
-              <router-link to="/">Inicio</router-link>
-            </li>
-            <li>
-              <router-link to="/eventos">Eventos</router-link>
-            </li>
-            <li>
-              <router-link to="/premios">Premios</router-link>
-            </li>
-            <li>
-              <router-link to="/contactenos">Contactenos</router-link>
-            </li>
-          </ul>
-        </nav>
-      </div>
-      <div class="header__section-login">
-        <button class="header__btn-login" @click="$emit('showLogin')">
-          Ingresar
-        </button>
+  <header class="header navbar">
+    <div class="header__navbar-brand navbar-brand">
+      <router-link to="/">
+        <img class="header__navbar-brand-image" src="@/assets/logo.png" alt="" />
+      </router-link>
+    </div>
+    <div class="header__navbar_nav">
+      <nav class="">
+        <ul class="header__navbar_links">
+          <li>
+            <router-link to="/">Inicio</router-link>
+          </li>
+          <li>
+            <router-link to="/eventos">Eventos</router-link>
+          </li>
+          <li>
+            <router-link to="/premios">Premios</router-link>
+          </li>
+          <li>
+            <router-link to="/about">Contactenos</router-link>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="header__section-login d-grid">
+      <div class="section-login_not-login d-flex">
+        <button class="header__btn-login" @click="$emit('showLogin')">Ingresar</button>
         <button class="header__btn-register" @click="$emit('showRegister')">
           Registrate
         </button>
       </div>
-      <div class="header__btn-collapse">
-        <button class="mdi mdi-menu"><span class=""></span></button>
+      <div class="section-login-logout d-flex">
+        <h1>{{ userdata || "" }}</h1>
+        <button @click="doLogout">Salir</button>
       </div>
-    </header>
+    </div>
+    <div class="header__btn-collapse">
+      <button class="mdi mdi-menu"><span class=""></span></button>
+    </div>
+  </header>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {};
+  },
+  methods: {
+    doLogout() {
+      console.log("saliendo");
+      this.$store.commit("setUser", null);
+      localStorage.removeItem("token");
+
+      //return to home
+      this.$router.push("/");
+    },
+  },
+  computed: {
+    ...mapState(["userdata"]),
+    hasLogin() {
+      return localStorage.getItem("token") ? true : false;
+    },
+    name() {
+      return this.$store.state.userdata.username;
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-
 $breackpoint: 768px;
 
 .header {
-  
   display: grid;
 
   grid-template-columns: 0.75fr 1fr 0.5fr;
@@ -90,10 +107,8 @@ $breackpoint: 768px;
   }
   @media (max-width: $breackpoint) {
     padding: 2px 10px;
-    grid-template-areas: "logo btnCollapse""login login""navegacion navegacion";
-
+    grid-template-areas: "logo btnCollapse" "login login" "navegacion navegacion";
   }
-
 
   .header__navbar-brand {
     grid-area: logo;
@@ -101,9 +116,9 @@ $breackpoint: 768px;
     justify-content: left;
     .header__navbar-brand-image {
       width: 150px;
-        @media (max-width: 768px) {
-      width: 80px;
-  }
+      @media (max-width: 768px) {
+        width: 80px;
+      }
     }
   }
   .header__navbar_nav {
@@ -130,7 +145,6 @@ $breackpoint: 768px;
       margin: 0 10px;
       border-radius: 50rem;
       font-family: "Mallanna", sans-serif;
-      
     }
     .header__btn-login {
       border: 2px $color-salmon solid;
@@ -143,11 +157,11 @@ $breackpoint: 768px;
       color: $color-text-header;
     }
   }
-  .header__btn-collapse{
+  .header__btn-collapse {
     grid-area: btnCollapse;
-      @media (min-width: $breackpoint) {
-        display: none;
-  }
+    @media (min-width: $breackpoint) {
+      display: none;
+    }
   }
 }
 </style>
