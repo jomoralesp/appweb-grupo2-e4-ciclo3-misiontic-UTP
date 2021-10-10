@@ -133,6 +133,8 @@ eventoRoute.route("/:id").get((req, res, next) => {
             {
                 $project: {
                     titulo: '$titulo',
+                    detalle: '$descripcion',
+                    lugar: '$lugar',
                     categoria: '$categoria.nombre',
                     sucursal: '$sucursal.nombre',
                     fecha_inicio: '$fecha_inicio',

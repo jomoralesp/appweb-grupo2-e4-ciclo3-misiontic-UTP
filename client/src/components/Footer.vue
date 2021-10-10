@@ -1,7 +1,7 @@
 <template>
   <div class="mx-0 Footer px-2">
-    <section class="footer__div-logo pt-3">
-      <img class="footer__div-logo-img" src="@/assets/Logo_MuevetexPuntos_2.png" alt="" />
+    <section class="Footer__div-logo pt-3">
+      <img class="Footer__div-logo-img" src="@/assets/logo.png" alt="" />
     </section>
     <footer class="pt-5">
       <div class="row w-100">
