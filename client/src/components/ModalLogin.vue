@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div v-show="showModal" class="modal-mask" @click.self="$emit('closeLogin')">
+    <div v-show="showModal" class="modal-mask" @click.self="clicDrop">
       <!-- <div id="modalLogin" v-show="showModal" class="modal-mask" @click.self="pressBg"> -->
       <div class="modal-wrapper">
         <div class="modal-dialog" style="margin: 0">
@@ -118,6 +118,13 @@ export default {
     },
   },
   methods: {
+    clicDrop(){
+      this.dataForm = {
+        username: '',
+        password: '',
+      };
+      this.$emit('closeLogin');
+    },
     doLogin() {
       //peticion
       axios
@@ -137,6 +144,7 @@ export default {
 
           this.$store.commit("setUser", res.data);
           localStorage.setItem("token", res.data.token);
+          localStorage.setItem("auth", "OK");
           console.log("Datos guardados");
           console.log(this.$store.state.userdata.username);
 
@@ -145,19 +153,21 @@ export default {
             username: "",
             password: "",
           };
+          this.$emit("hasLogin");
           this.$emit("closeLogin");
 
           //redirigir al home
           if (this.$store.state.userdata.rol === "ADMIN") {
-            this.$router.push("/admin");
+            if (this.$route.name != "/admin") { this.$router.push("/admin").catch(()=>{});
+            }
           } else {
-            this.$router.push("/");
+            if (this.$route.name != "/") { this.$router.push("/").catch(()=>{});}
           }
         })
         .catch((error) => {
           this.dataForm = {
             username: "",
-            password: "",
+            password: ""
           };
           console.log("Error");
           console.log(error.message);

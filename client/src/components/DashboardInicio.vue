@@ -1,9 +1,10 @@
 <template>
   <div class="Inicio">
-    <h1>Este es la vista principal</h1>
-    {{ this.userName }}
-    {{ userinfo }}
-    {{ $store.state.userdata }}
+    <h1>Este es el dashboard</h1>
+    <p></p>
+    <h2>Bienvenido</h2>
+    <p>{{ $store.state.userdata.username }}</p>
+    <p>Último acceso {{ $store.state.userdata.fecha_acceso }}</p>
   </div>
 </template>
 <script>
@@ -15,7 +16,7 @@ export default {
   },
   computed: {
     userinfo() {
-      return this.$store.state.userdata;
+      return this.$store.state.userdata.username;
     },
   },
 };

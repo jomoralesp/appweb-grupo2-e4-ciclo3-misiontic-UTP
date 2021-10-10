@@ -2,7 +2,11 @@
   <header class="header navbar">
     <div class="header__navbar-brand navbar-brand">
       <router-link to="/">
-        <img class="header__navbar-brand-image" src="@/assets/logo.png" alt="" />
+        <img
+          class="header__navbar-brand-image"
+          src="@/assets/logo.png"
+          alt=""
+        />
       </router-link>
     </div>
     <div class="header__navbar_nav">
@@ -17,22 +21,40 @@
           <li>
             <router-link to="/premios">Premios</router-link>
           </li>
-          <li>
+          <li >
             <router-link to="/about">Contactenos</router-link>
           </li>
+          <li v-show="loginHasAdmin">
+            <router-link to="/admin">Dashboard</router-link>
+          </li>
+          <li v-show="loginHasUser">
+            <router-link to="/puntos">Mis puntos</router-link>
+          </li>
+
+
         </ul>
       </nav>
     </div>
     <div class="header__section-login d-grid">
-      <div class="section-login_not-login d-flex">
-        <button class="header__btn-login" @click="$emit('showLogin')">Ingresar</button>
+      <div
+        class="section-login_not-login d-flex"
+        v-if="isLogin === false ? true : false"
+      >
+        <button class="header__btn-login" @click="$emit('showLogin')">
+          Ingresar
+        </button>
         <button class="header__btn-register" @click="$emit('showRegister')">
           Registrate
         </button>
       </div>
-      <div class="section-login-logout d-flex">
-        <h1>{{ userdata || "" }}</h1>
-        <button @click="doLogout">Salir</button>
+      <div
+        class="section-login-logout d-flex"
+        v-if="isLogin === true ? true : false"
+      >
+        <router-link class="" :to="'/user/' + userInfo ? userInfo.username : ''">{{
+          userInfo ? userInfo.username : ''
+        }}</router-link>
+        <button class="header__btn-logout" @click="doLogout">Salir</button>
       </div>
     </div>
     <div class="header__btn-collapse">
@@ -47,23 +69,34 @@ export default {
   data() {
     return {};
   },
+  props: ["isLogin", "userInfo"],
   methods: {
     doLogout() {
       console.log("saliendo");
-      this.$store.commit("setUser", null);
+      this.$store.commit("setUser", undefined);
       localStorage.removeItem("token");
+      localStorage.removeItem("auth");
 
       //return to home
-      this.$router.push("/");
+      //redirigir al home
+      if (this.$route.name != "/") {
+        this.$router.push("/").catch(() => {});
+      }
+      this.$emit("hasLogout");
     },
+  },
+  updated() {
+    console.log("Actualizado");
+    console.log(this.hasLogin);
+    console.log(this.$store.state.userdata);
   },
   computed: {
     ...mapState(["userdata"]),
-    hasLogin() {
-      return localStorage.getItem("token") ? true : false;
+    loginHasAdmin(){
+      if(this.isLogin){return this.userInfo.rol === "ADMIN" ? true: false}else{return false}
     },
-    name() {
-      return this.$store.state.userdata.username;
+        loginHasUser(){
+      if(this.isLogin){return this.userInfo.rol === "USER" ? true: false}else{return false}
     },
   },
 };
@@ -146,7 +179,8 @@ $breackpoint: 768px;
       border-radius: 50rem;
       font-family: "Mallanna", sans-serif;
     }
-    .header__btn-login {
+    .header__btn-login,
+    .header__btn-logout {
       border: 2px $color-salmon solid;
       background: $color-salmon;
       color: white;

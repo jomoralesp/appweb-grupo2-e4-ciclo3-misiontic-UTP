@@ -25,13 +25,13 @@
     ></PremioForm>
     <PremioNewForm
       :categorias="listaCategoriaPremios"
-      v-show="showNewFormPremio"
+      v-if="showNewFormPremio"
       @cerrarForm="closeForm"
     ></PremioNewForm>
     <PremioDetail
       :idPremio="premioSelect"
       :dataPremioId="dataPremioSelected"
-      v-show="showDetailPremio"
+      v-if="showDetailPremio"
       @cerrarDetalle="closeDetail"
       @editarPremio="openForm(premioSelect)"
       @eliminarPremio="deletePremio(premioSelect)"
