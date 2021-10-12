@@ -81,6 +81,7 @@ router.beforeEach((to, from, next) => {
       next();
     } else {
       next({ name: "Home" });
+      alert("No autorizado");
     }
   } else {
     next();

@@ -49,14 +49,12 @@
         class="section-login-logout d-flex"
         v-if="isLogin === true ? true : false"
       >
-        <router-link
-          class="text-decoration-none"
-          :to="'/user/' + userInfo ? userInfo.username : ''"
+        <p
         >
           <span v-if="loginHasUser" class="mdi mdi-account"></span>
           <span v-if="loginHasAdmin" class="mdi mdi-key"></span>
           {{ userInfo ? userInfo.username : "" }}
-        </router-link>
+        </p>
 
         <button class="header__btn-logout" @click="doLogout">
           Salir <span class="mdi mdi-logout"></span>
@@ -195,6 +193,7 @@ $breackpoint: 768px;
   .header__section-login {
     grid-area: login;
     display: flex;
+    align-items: baseline;
     flex-direction: row;
     justify-content: space-around;
     button {
