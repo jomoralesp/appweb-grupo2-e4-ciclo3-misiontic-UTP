@@ -1,12 +1,7 @@
 <template>
   <div class="mx-0 Footer px-2">
-<<<<<<< HEAD
-    <section class="footer__div-logo pt-3">
-      <img class="footer__div-logo-img" src="@/assets/Logo_MuevetexPuntos_2.png" alt="" />
-=======
     <section class="Footer__div-logo pt-3">
       <img class="Footer__div-logo-img" src="@/assets/logo_light.png" alt="" />
->>>>>>> a5883909207c3d28a2ff34fa3ed57ad8e5e1f40b
     </section>
     <footer class="pt-5">
       <div class="row w-100">

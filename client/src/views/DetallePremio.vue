@@ -1,9 +1,5 @@
 <template>
-<<<<<<< HEAD
-  <div>
-=======
   <div class="container">
->>>>>>> a5883909207c3d28a2ff34fa3ed57ad8e5e1f40b
     <div v-show="!dataPremios ? true : false" class="container-loading">
       <grid-loader
         class="Spinner__loading"
@@ -13,134 +9,6 @@
         style="background-color: white"
       ></grid-loader>
     </div>
-<<<<<<< HEAD
-    <div class="container" v-if="!dataPremios ? false : true">
-      <div class="container-section1">
-        <div class="container-body">
-          <div class="imagen">
-            <pulse-loader
-              :color="colorLoading"
-              style="margin-block: 150px"
-              :loading="imagen != '' ? false : true"
-            ></pulse-loader>
-            <img
-              v-show="imagen === '' ? false : true"
-              :src="dataPremios ? imagen : '@/assets/cross.jpg'"
-              alt="Clock"
-              sizes="(min-width: 600px) 200px, 50vw"
-            />
-          </div>
-
-          <div class="caracteristica-product">
-            <div class="title">
-              <h2>Caracteristica del producto</h2>
-            </div>
-            <div class="body-caracteristicas">
-              <ul>
-                <li>
-                  <strong> Categoria: </strong>
-                  {{ dataPremios ? dataPremios.categoria : "" }}
-                </li>
-                <li>
-                  <strong> Marca: </strong> {{ dataPremios ? dataPremios.marca : "" }}
-                </li>
-              </ul>
-            </div>
-            <hr />
-          </div>
-
-          <div class="descripcion">
-            <div class="title-descripcion">
-              <h2>Descripcion</h2>
-            </div>
-            <div class="body-descripcion">
-              {{ dataPremios ? dataPremios.detalle : "" }}
-            </div>
-          </div>
-
-          <div class="detalle-premio">
-            <div class="nombre-premio">
-              <p class="h4">{{ dataPremios ? dataPremios.nombre : "" }}</p>
-            </div>
-
-            <div class="start">
-              <span style="font-size: 1.5em; color: #888888">
-                <span class="mdi mdi-star"></span>
-                <span class="mdi mdi-star"></span>
-                <span class="mdi mdi-star"></span>
-                <span class="mdi mdi-star"></span>
-                <span class="mdi mdi-star"></span>
-              </span>
-            </div>
-
-            <div class="puntos">
-              Puntos: {{ dataPremios ? dataPremios.valor_puntos : "" }}
-            </div>
-
-            <div class="envio">
-              <span style="font-size: 1.5em; color: #888888">
-                <span class="mdi mdi-truck-check-outline"></span>
-              </span>
-              <p class="px-2 m-0">Envio gratis</p>
-            </div>
-
-            <div class="color">Color: <span> Gris</span></div>
-
-            <hr />
-
-            <div class="stock">
-              <p class="h5">Stock disponible</p>
-            </div>
-
-            <div class="cant">
-              <p>
-                Cantidades:
-                <span id="unit">1 Unidad</span>
-                <span id="dispo"
-                  >( {{ dataPremios ? dataPremios.cantidad : "" }} disponibles)</span
-                >
-              </p>
-            </div>
-
-            <button type="button">Obtener ahora</button>
-
-            <div class="garantia">
-              <p class="mb-2">
-                <span style="font-size: 1.5em; color: #888888">
-                  <span class="mdi mdi-shield-check"></span>
-                </span>
-                Compra protegida
-              </p>
-
-              <p class="mb-2">
-                <span style="font-size: 1.5em; color: #888888">
-                  <span class="mdi mdi-medal"></span>
-                </span>
-                Garantia de 12 meses
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="container-section">¡Gana mas puntos!</div>
-      <div class="container-section2">
-        <div class="body-section2">
-          <div class="imagenEvento">
-            <img
-              src="../assets/images/Eventos/conciertoMusicaClasica.jpeg"
-              alt="Clock"
-              sizes="(min-width: 400px) 200px, 50vw"
-              align="center"
-            />
-          </div>
-          <div class="descripcion">
-            Participa en nuestros eventos, acumula puntos y gana muchos premios
-          </div>
-          <div class="masEventos">
-            <u> Ver catalogo de eventos</u>
-          </div>
-=======
 
     <div v-if="!dataPremios ? false : true" class="container-section1">
       <div class="container-body">
@@ -268,7 +136,6 @@
         </div>
         <div class="masEventos">
           <u> Ver catalogo de eventos</u>
->>>>>>> a5883909207c3d28a2ff34fa3ed57ad8e5e1f40b
         </div>
       </div>
     </div>
