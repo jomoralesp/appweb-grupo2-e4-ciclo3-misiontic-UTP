@@ -2,11 +2,7 @@
   <div class="container">
     <div class="imagen-banner">
       <img
-<<<<<<< HEAD
-        src="../assets/images/eventos/conciertomusicaclasica.jpg"
-=======
         :src="imagen"
->>>>>>> a5883909207c3d28a2ff34fa3ed57ad8e5e1f40b
         alt="Clock"
         sizes="(min-width: 600px) 200px, 50vw"
         align="center"
@@ -14,11 +10,7 @@
     </div>
 
     <div class="rejilla">
-<<<<<<< HEAD
-      <div class="nombreEvento">Concierto de musica clasica</div>
-=======
       <div class="nombreEvento">{{ dataEvento ? dataEvento.titulo : "Cargando" }}</div>
->>>>>>> a5883909207c3d28a2ff34fa3ed57ad8e5e1f40b
 
       <div class="descripcion">
         <div class="title-descripcion">
@@ -26,24 +18,7 @@
         </div>
         <hr />
         <div class="body-descripcion">
-<<<<<<< HEAD
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. At lobortis vehicula
-          erat amet non netus eros. Proin felis consequat nulla cursus sed. Vel, commodo
-          dignissim et tincidunt magna consectetur. Pellentesque sapien viverra nulla
-          accumsan nibh. Nibh sed tristique libero eget nec, neque orci id dictum. In
-          dignissim pellentesque viverra eget varius eu. Egestas nisi, quis maecenas et
-          aliquam sed. Massa sagittis, amet, ultrices enim ut nisl nulla condimentum
-          consequat. Ut sed et quam est augue risus. Volutpat senectus purus tortor duis
-          quis in proin. Duis nunc facilisis interdum euismod volutpat, venenatis. Dui,
-          dignissim gravida eu commodo ultrices. Habitasse pretium lorem posuere viverra
-          pretium quisque. Donec aenean felis, netus risus velit, tortor purus diam. Proin
-          gravida diam et tincidunt viverra. Bibendum non ut est, in. Pellentesque eu
-          faucibus pharetra turpis nunc massa lectus dis praesent. Massa suscipit vel
-          gravida neque, ut lacus odio nisl. Placerat at augue sit mus lacus quam aliquet.
-          Gravida aliquam ac.
-=======
           {{ dataEvento ? dataEvento.detalle : "detalle" }}
->>>>>>> a5883909207c3d28a2ff34fa3ed57ad8e5e1f40b
         </div>
       </div>
 
@@ -53,12 +28,6 @@
         <hr />
 
         <ul>
-<<<<<<< HEAD
-          <li>Lugar: <span> Pereira </span></li>
-          <li>Fecha: <span> 1/10/2021 </span></li>
-          <li>Hora: <span> 10:00 a.m. </span></li>
-          <li>Puntos: <span> 5000 </span></li>
-=======
           <li>
             Lugar: <span> {{ dataEvento ? dataEvento.lugar : "" }} </span>
           </li>
@@ -71,7 +40,6 @@
           <li>
             Puntos: <span> {{ dataEvento ? dataEvento.valor_puntos : "" }} </span>
           </li>
->>>>>>> a5883909207c3d28a2ff34fa3ed57ad8e5e1f40b
         </ul>
 
         <hr />
@@ -84,10 +52,6 @@
   </div>
 </template>
 
-<<<<<<< HEAD
-<script></script>
-
-=======
 <script>
 import axios from "axios";
 export default {
@@ -144,7 +108,6 @@ export default {
   },
 };
 </script>
->>>>>>> a5883909207c3d28a2ff34fa3ed57ad8e5e1f40b
 <style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css2?family=Allerta&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Abel&display=swap");
@@ -155,11 +118,7 @@ export default {
   margin: 0;
   padding: 0;
   background: #ededed;
-<<<<<<< HEAD
-  background-image: url(../assets/Rectangle.svg);
-=======
   background-image: url(../assets/images/DetalleEventoYPremio/Rectangle.svg);
->>>>>>> a5883909207c3d28a2ff34fa3ed57ad8e5e1f40b
   background-size: contain;
   background-repeat: no-repeat;
   max-width: 100%;

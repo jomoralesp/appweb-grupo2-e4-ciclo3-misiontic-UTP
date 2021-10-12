@@ -1,11 +1,7 @@
 <template>
   <div class="container">
-<<<<<<< HEAD
-    <div v-show="showModal" class="modal-mask" @click="$emit('closeLogin')">
-=======
     <div v-show="showModal" class="modal-mask" @click.self="clicDrop">
       <!-- <div id="modalLogin" v-show="showModal" class="modal-mask" @click.self="pressBg"> -->
->>>>>>> a5883909207c3d28a2ff34fa3ed57ad8e5e1f40b
       <div class="modal-wrapper">
         <div class="modal-dialog" style="margin: 0">
           <div
@@ -29,15 +25,6 @@
                 </h2>
                 <p></p>
                 <h6 class="text-start">Ingresa con usuario y contraseña</h6>
-<<<<<<< HEAD
-                <form>
-                  <div class="mb-3">
-                    <input
-                      class="form-control"
-                      type="text"
-                      placeholder="Ingresa tu nombre de usuario"
-                      syle="font-family: 'Abel', sans-serif"
-=======
                 <form @submit.prevent="doLogin">
                   <div class="mb-3">
                     <input
@@ -48,29 +35,10 @@
                       placeholder="Ingresa tu usuario"
                       syle="font-family: 'Abel', sans-serif"
                       required
->>>>>>> a5883909207c3d28a2ff34fa3ed57ad8e5e1f40b
                     />
                   </div>
                   <div class="mb-3">
                     <input
-<<<<<<< HEAD
-                      class="form-control"
-                      type="text"
-                      placeholder="Ingresa tu contraseña"
-                      syle="font-family: 'Abel', sans-serif"
-                    />
-                  </div>
-                </form>
-                <p></p>
-                <h6 class="text-start">
-                  <router-link to="" class="routerlink"
-                    >Olvidaste tu contraseña</router-link
-                  >
-                </h6>
-                <p></p>
-                <div class="d-grid gap-2">
-                  <button class="btn btn-primary" type="button">Entrar</button>
-=======
                       v-model="dataForm.password"
                       class="form-control"
                       :class="watchInput"
@@ -93,7 +61,6 @@
                 </form>
 
                 <div class="d-grid gap-2">
->>>>>>> a5883909207c3d28a2ff34fa3ed57ad8e5e1f40b
                   <button
                     class="btn btn-secondary"
                     type="button"
@@ -112,15 +79,7 @@
                   <p></p>
                   <p></p>
                   <div class="text-center">
-<<<<<<< HEAD
-                    <img
-                      class="footer__div-logo-img"
-                      src="@/assets/Logo_MuevetexPuntos.png"
-                      alt=""
-                    />
-=======
                     <img class="footer__div-logo-img" src="@/assets/logo.png" alt="" />
->>>>>>> a5883909207c3d28a2ff34fa3ed57ad8e5e1f40b
                   </div>
                 </div>
               </div>
@@ -138,11 +97,6 @@ import axios from "axios";
 export default {
   props: ["showModal"],
   data() {
-<<<<<<< HEAD
-    return {};
-  },
-  methods: {},
-=======
     return {
       errorPass: undefined,
       errorLogin: undefined,
@@ -189,7 +143,13 @@ export default {
           this.errorMsg = undefined;
 
           this.$store.commit("setUser", res.data);
+console.log(res.data.fecha_acceso);
+          localStorage.setItem("username", res.data.username)
+          localStorage.setItem("id", res.data.id_user)
+          localStorage.setItem("rol", res.data.rol)
+          localStorage-setItem("fecha", res.data.fecha_acceso)
           localStorage.setItem("token", res.data.token);
+
           localStorage.setItem("auth", "OK");
           console.log("Datos guardados");
           console.log(this.$store.state.userdata.username);
@@ -228,7 +188,6 @@ export default {
         });
     },
   },
->>>>>>> a5883909207c3d28a2ff34fa3ed57ad8e5e1f40b
 };
 </script>
 

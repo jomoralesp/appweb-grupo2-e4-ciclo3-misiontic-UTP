@@ -5,7 +5,6 @@
       </div>
       <p></p>
       <form class="row g-3" @submit.prevent="onPress">
-  
         <div class="row mb-3">
           <label for="titulo" class="col-sm-2 col-form-label">Título del Evento</label>
           <div class="col-sm-9">
@@ -160,7 +159,9 @@
 </template>
 
 <script>
+
 import axios from "axios";
+
 export default {
   props: ["categorias", "tipos", "sucursales", "idEvento", "dataEvento"],
   data() {
