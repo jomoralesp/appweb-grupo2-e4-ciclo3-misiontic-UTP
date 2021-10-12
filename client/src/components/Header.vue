@@ -9,7 +9,7 @@
         />
       </router-link>
     </div>
-    <div class="header__navbar_nav">
+    <div class="header__navbar_nav" v-show="!collapseHeader">
       <nav class="container-fluid">
         <ul class="navbar-nav header__navbar_links">
           <li class="nav-item">
@@ -33,7 +33,7 @@
         </ul>
       </nav>
     </div>
-    <div class="header__section-login">
+    <div class="header__section-login" v-show="!collapseHeader">
       <div
         class="section-login_not-login d-flex"
         v-if="isLogin === false ? true : false"
@@ -49,14 +49,12 @@
         class="section-login-logout d-flex"
         v-if="isLogin === true ? true : false"
       >
-        <router-link
-          class="text-decoration-none"
-          :to="'/user/' + userInfo ? userInfo.username : ''"
+        <p
         >
           <span v-if="loginHasUser" class="mdi mdi-account"></span>
           <span v-if="loginHasAdmin" class="mdi mdi-key"></span>
           {{ userInfo ? userInfo.username : "" }}
-        </router-link>
+        </p>
 
         <button class="header__btn-logout" @click="doLogout">
           Salir <span class="mdi mdi-logout"></span>
@@ -64,7 +62,7 @@
       </div>
     </div>
     <div class="header__btn-collapse">
-      <button class="btn"><span class="mdi mdi-menu mdi-18px"></span></button>
+      <button class="btn_collapse" @click="collapseNav"><span class="mdi mdi-menu mdi-18px"></span></button>
     </div>
   </header>
 </template>
@@ -73,7 +71,9 @@
 import { mapState } from "vuex";
 export default {
   data() {
-    return {};
+    return {
+      collapseHeader: false,
+    };
   },
   props: ["isLogin", "userInfo"],
   methods: {
@@ -90,6 +90,9 @@ export default {
       }
       this.$emit("hasLogout");
     },
+    collapseNav(){
+      this.collapseHeader = !this.collapseHeader;
+    }
   },
   computed: {
     ...mapState(["userdata"]),
@@ -113,7 +116,10 @@ export default {
 
 <style lang="scss" scoped>
 $breackpoint: 768px;
-
+.btn_collapse{
+  border: none;
+  background-color: transparent;
+}
 .header {
   display: grid;
 
@@ -163,6 +169,7 @@ $breackpoint: 768px;
       width: 120px;
       @media (max-width: $breackpoint) {
   justify-content: center;
+  width: 80px;
       }
     }
   }
@@ -186,6 +193,7 @@ $breackpoint: 768px;
   .header__section-login {
     grid-area: login;
     display: flex;
+    align-items: baseline;
     flex-direction: row;
     justify-content: space-around;
     button {

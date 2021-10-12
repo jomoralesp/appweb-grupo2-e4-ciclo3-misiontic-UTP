@@ -121,8 +121,7 @@ export default {};
     display: flex;
     justify-content: left;
     &.Footer__div-logo-img {
-      width: 200px;
-      margin: 20px;
+      margin: 22px;
     }
   }
 }

@@ -10,7 +10,13 @@
       :showModal="isOpenModalRegister"
       @closeRegister="closeModalRegister"
     ></ModalRegister>
-    <Header  @showLogin="showModalLogin" @showRegister="showModalRegister" :isLogin="isLogin" :userInfo = "userInfo" @hasLogout="hasLogout"></Header>
+    <Header
+      @showLogin="showModalLogin"
+      @showRegister="showModalRegister"
+      :isLogin="isLogin"
+      :userInfo="userInfo"
+      @hasLogout="hasLogout"
+    ></Header>
     <router-view />
     <Footer></Footer>
   </div>
@@ -26,36 +32,47 @@ export default {
     return {
       isOpenModalLogin: false,
       isOpenModalRegister: false,
-      isLogin: false, 
-      userInfo: undefined
+      isLogin: false,
+      userInfo: undefined,
     };
   },
   mounted() {
-    if(!this.$store.state.userdata && localStorage.getItem("auth") === "OK"){
-this.$store.commit("setUser", {
-      username: localStorage.getItem("username"),
-      rol: localStorage.getItem("rol"),
-      token: localStorage.getItem("token"),
-      fecha_acceso: localStorage.getItem("fecha")
-    })
+    if (localStorage.getItem("auth") === "OK") {
+      console.log("Ya se encuentra autenticado");
+      this.$store.commit("setUser", {
+        username: localStorage.getItem("username"),
+        rol: localStorage.getItem("rol"),
+        fecha_acceso: localStorage.getItem("fecha"),
+        token: localStorage.getItem("token"),
+      });
+
+      this.isLogin = true;
+
+      this.userInfo = {
+        username: this.$store.state.userdata.username,
+        rol: this.$store.state.userdata.rol,
+      };
     }
-    this.actualizarHeader();
   },
   methods: {
-    actualizarHeader(){
-      console.log( this.$store.state.userdata);
-      if(localStorage.getItem("auth") === "OK"){
-        console.log("Ha ingresado el" +this.$store.state.userdata.rol +":"+this.$store.state.userdata.username);
+    actualizarHeader() {
+      console.log(this.$store.state.userdata);
+      if (localStorage.getItem("auth") === "OK") {
+        console.log(
+          "Ha ingresado el" +
+            this.$store.state.userdata.rol +
+            ":" +
+            this.$store.state.userdata.username
+        );
         this.isLogin = true;
 
         this.userInfo = {
           username: this.$store.state.userdata.username,
-          rol: this.$store.state.userdata.rol
-        }
-
+          rol: this.$store.state.userdata.rol,
+        };
       }
     },
-    hasLogout(){
+    hasLogout() {
       //resetear informacion y valor booleano de login
       this.isLogin = false;
       this.userInfo = undefined;
