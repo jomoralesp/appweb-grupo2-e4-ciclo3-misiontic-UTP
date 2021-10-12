@@ -10,32 +10,30 @@
       </router-link>
     </div>
     <div class="header__navbar_nav">
-      <nav class="">
-        <ul class="header__navbar_links">
-          <li>
-            <router-link to="/">Inicio</router-link>
+      <nav class="container-fluid">
+        <ul class="navbar-nav header__navbar_links">
+          <li class="nav-item">
+            <router-link class="nav-item" to="/">Inicio</router-link>
           </li>
-          <li>
-            <router-link to="/eventos">Eventos</router-link>
+          <li class="nav-item">
+            <router-link class="nav-item" to="/eventos">Eventos</router-link>
           </li>
-          <li>
-            <router-link to="/premios">Premios</router-link>
+          <li class="nav-item">
+            <router-link class="nav-item" to="/premios">Premios</router-link>
           </li>
-          <li >
-            <router-link to="/about">Contactenos</router-link>
+          <li class="nav-item">
+            <router-link class="nav-item" to="/about">Contactenos</router-link>
           </li>
-          <li v-show="loginHasAdmin">
-            <router-link to="/admin">Dashboard</router-link>
+          <li class="nav-item" v-show="loginHasAdmin">
+            <router-link class="nav-item" to="/admin">Dashboard</router-link>
           </li>
           <li v-show="loginHasUser">
             <router-link to="/puntos">Mis puntos</router-link>
           </li>
-
-
         </ul>
       </nav>
     </div>
-    <div class="header__section-login d-grid">
+    <div class="header__section-login">
       <div
         class="section-login_not-login d-flex"
         v-if="isLogin === false ? true : false"
@@ -51,14 +49,22 @@
         class="section-login-logout d-flex"
         v-if="isLogin === true ? true : false"
       >
-        <router-link class="" :to="'/user/' + userInfo ? userInfo.username : ''">{{
-          userInfo ? userInfo.username : ''
-        }}</router-link>
-        <button class="header__btn-logout" @click="doLogout">Salir</button>
+        <router-link
+          class="text-decoration-none"
+          :to="'/user/' + userInfo ? userInfo.username : ''"
+        >
+          <span v-if="loginHasUser" class="mdi mdi-account"></span>
+          <span v-if="loginHasAdmin" class="mdi mdi-key"></span>
+          {{ userInfo ? userInfo.username : "" }}
+        </router-link>
+
+        <button class="header__btn-logout" @click="doLogout">
+          Salir <span class="mdi mdi-logout"></span>
+        </button>
       </div>
     </div>
     <div class="header__btn-collapse">
-      <button class="mdi mdi-menu"><span class=""></span></button>
+      <button class="btn"><span class="mdi mdi-menu mdi-18px"></span></button>
     </div>
   </header>
 </template>
@@ -85,18 +91,21 @@ export default {
       this.$emit("hasLogout");
     },
   },
-  updated() {
-    console.log("Actualizado");
-    console.log(this.hasLogin);
-    console.log(this.$store.state.userdata);
-  },
   computed: {
     ...mapState(["userdata"]),
-    loginHasAdmin(){
-      if(this.isLogin){return this.userInfo.rol === "ADMIN" ? true: false}else{return false}
+    loginHasAdmin() {
+      if (this.isLogin) {
+        return this.userInfo.rol === "ADMIN" ? true : false;
+      } else {
+        return false;
+      }
     },
-        loginHasUser(){
-      if(this.isLogin){return this.userInfo.rol === "USER" ? true: false}else{return false}
+    loginHasUser() {
+      if (this.isLogin) {
+        return this.userInfo.rol === "USER" ? true : false;
+      } else {
+        return false;
+      }
     },
   },
 };
@@ -108,7 +117,7 @@ $breackpoint: 768px;
 .header {
   display: grid;
 
-  grid-template-columns: 0.75fr 1fr 0.5fr;
+  grid-template-columns: 0.25fr 1fr 0.4fr;
 
   box-shadow: 0rem 0.5rem 1rem $color-header-shadow;
 
@@ -135,22 +144,25 @@ $breackpoint: 768px;
     background: white;
     padding: 5px 50px;
     grid-template-areas: "logo navegacion login";
-    grid-template-columns: 0.75fr 1fr 0.5fr;
-    grid-column-gap: 5%;
   }
   @media (max-width: $breackpoint) {
     padding: 2px 10px;
     grid-template-areas: "logo btnCollapse" "login login" "navegacion navegacion";
+    grid-template-columns: 1fr 1fr;
   }
 
   .header__navbar-brand {
     grid-area: logo;
     display: inline-flex;
     justify-content: left;
-    .header__navbar-brand-image {
-      width: 150px;
-      @media (max-width: 768px) {
-        width: 80px;
+      @media (max-width: $breackpoint) {
+  justify-content: center;
+      }
+
+.header__navbar-brand-image {
+      width: 120px;
+      @media (max-width: $breackpoint) {
+  justify-content: center;
       }
     }
   }
@@ -162,9 +174,12 @@ $breackpoint: 768px;
       display: flex;
       justify-content: flex-end;
       margin-bottom: 0;
-
+      flex-direction: row;
+      @media (max-width: $breackpoint) {
+        flex-direction: column;
+      }
       li {
-        margin-left: 20%;
+        margin-inline: 5%;
       }
     }
   }
@@ -184,6 +199,7 @@ $breackpoint: 768px;
       border: 2px $color-salmon solid;
       background: $color-salmon;
       color: white;
+      width: 5rem;
     }
     .header__btn-register {
       border: 2px $color-salmon solid;
