@@ -6,6 +6,7 @@ Repositorio de trabajo del Equipo 4 del Grupo 02
 * Laura Natalia Motta Cadena
 * Fabian David Guevara Pinilla
 * Cristian Alberto Curiel Camargo
+* Javier orlando Morales Parra
 
 ## Publicación deploy en Netlify
 https://muevetexpuntos.netlify.app/
