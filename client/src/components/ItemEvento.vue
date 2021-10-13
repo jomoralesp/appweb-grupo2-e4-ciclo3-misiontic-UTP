@@ -1,23 +1,22 @@
 <template>
   <button v-if="dataEvento.disponible" @click="handleClick">
     <div class="Eventos__item">
-
-        <div class="imagen">
-          <!--
+      <div class="imagen">
+        <!--
             "urlServer != '' ? false : true"
           -->
-          <div v-show="urlServer === '' ? true : false" class="spinnerLoader">
-              <pulse-loader
-                :color="colorLoading"
-              ></pulse-loader>
-          </div>
-
-          <div v-show="urlServer != '' ? true : false" class="Eventos__ItemEvento-img">
-            <img :src="urlServer" alt="" />
-            <h2 class="fs-4">{{ dataEvento.tipo }}</h2>
-          </div>
-
+        <div v-show="urlServer === '' ? true : false" class="spinnerLoader">
+          <pulse-loader :color="colorLoading"></pulse-loader>
         </div>
+
+        <div
+          v-show="urlServer != '' ? true : false"
+          class="Eventos__ItemEvento-img"
+        >
+          <img :src="urlServer" alt="" />
+          <h2 class="fs-4">{{ dataEvento.tipo }}</h2>
+        </div>
+      </div>
 
       <div class="Eventos__ItemEvento-text">
         <div class="itemevento-descripcion">{{ dataEvento.titulo }}</div>
@@ -26,8 +25,8 @@
           <p id="text-puntos">Puntos</p>
         </div>
         <div class="itemevento-fecha">
-          {{ dataEvento.fecha_inicio }} <br />
-          {{ dataEvento.cupo }}
+          {{ fecha }} <br />
+          {{ hora }}
         </div>
       </div>
     </div>
@@ -46,14 +45,22 @@ export default {
     return {
       urlServer: "",
       colorLoading: "#242f3d",
+      fecha: "",
+      hora: "",
     };
   },
   components: { PulseLoader, GridLoader },
+
   mounted() {
+    this.hora = this.getHora();
+    this.fecha = this.getFecha();
+
     let urlServer = process.env.VUE_APP_ROOT;
 
     axios
-      .get(urlServer + this.dataEvento.path_foto, { responseType: "arraybuffer" })
+      .get(urlServer + this.dataEvento.path_foto, {
+        responseType: "arraybuffer",
+      })
       .then((response) => {
         const base64 = btoa(
           new Uint8Array(response.data).reduce(
@@ -87,6 +94,30 @@ export default {
   },
 
   methods: {
+    getFecha() {
+      let infoFecha = this.dataEvento.fecha_inicio.split("T");
+      let fecha = infoFecha[0];
+      var meses = [
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre",
+      ];
+      return meses[parseInt(fecha.split("-")[1])] + " " + fecha.split("-")[2];
+    },
+    getHora() {
+      let infoFecha = this.dataEvento.fecha_inicio.split("T");
+      let hora = infoFecha[1];
+      return hora + " Horas";
+    },
     handleClick() {
       this.$router.push("/eventos/detalle/" + this.dataEvento._id);
       window.scrollTo(0, 0);
@@ -95,20 +126,16 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-
-.spinnerLoader{
-
-    background-color: white;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    height: 200px;
-    position: absolute;
-    width: 100%;
-
+.spinnerLoader {
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  position: absolute;
+  width: 100%;
 }
-
 
 button {
   border: none;
@@ -122,6 +149,7 @@ button {
 }
 .Eventos__item {
   min-height: 300px;
+  min-width: 240px;
   font-family: "Assistant", sans-serif;
   display: flex;
   flex-direction: column;
@@ -138,6 +166,7 @@ button {
       background: $color-footer-section-contacto;
       width: 40%;
       top: 0;
+      right: 0;
       margin: 0;
       font-size: 18px;
       height: 28px;

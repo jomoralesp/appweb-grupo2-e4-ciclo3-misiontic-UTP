@@ -1,5 +1,5 @@
 <template>
-  <router-link v-if="dataPremio.visible" :to="'/premios/detalle/' + dataPremio._id">
+  <router-link class="text-decoration-none" v-if="dataPremio.visible" :to="'/premios/detalle/' + dataPremio._id">
 
     <div v-show="urlServer === '' ? true : false" class="spinnerLoader">
         <pulse-loader

@@ -125,6 +125,7 @@
       <div class="body-section2">
         <div class="imagenEvento">
           <img
+          class="img-fluid"
             src="../assets/images/Eventos/conciertoMusicaClasica.jpeg"
             alt="Clock"
             sizes="(min-width: 400px) 200px, 50vw"

@@ -115,7 +115,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$breackpoint: 768px;
+$breackpoint: 576px;
 .btn_collapse{
   border: none;
   background-color: transparent;
@@ -146,11 +146,10 @@ $breackpoint: 768px;
     }
   }
 
-  @media (min-width: $breackpoint) {
     background: white;
     padding: 5px 50px;
     grid-template-areas: "logo navegacion login";
-  }
+
   @media (max-width: $breackpoint) {
     padding: 2px 10px;
     grid-template-areas: "logo btnCollapse" "login login" "navegacion navegacion";
