@@ -89,11 +89,11 @@
       </div>
       <div class="container">
         <div class="row">
-          <div class="col-md-3 offset-sm-2 text-center">
+          <div class="col-md-3 offset-sm-2 text-center" style="padding-inline-end: 2%">
             <label>Cantidad</label>
             <input
               type="number"
-              class="form-control"
+              class="form-control col-md-3"
               placeholder="Cantidad"
               v-model.number="modelPremio.cantidad"
               required
@@ -103,7 +103,7 @@
             <label>Puntos</label>
             <input
               type="number"
-              class="form-control"
+              class="form-control "
               placeholder="Valor puntos"
               v-model.number="modelPremio.valor_puntos"
               required
@@ -126,6 +126,7 @@
           <option :value="false">Oculto</option>
         </select>
         </div>
+        <div class="col-md-3"></div>
       </div>
       <div class="col-md-4 offset-sm-4 text-center">
         <button
@@ -135,7 +136,7 @@
         >
           Limpiar
         </button>
-        <button type="submit" class="btn btn-outline-success w-25 m-3">
+        <button type="submit" class="btn btn-outline-success m-3">
           Crear
         </button>
       </div>
